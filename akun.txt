@@ -1,0 +1,4 @@
+MAIL_DRIVER=smtp
+MAIL_HOST=smpt.gmail.com
+MAIL_PORT_587
+MAIL_USERNAME=codinger.me.me@gmail.com
