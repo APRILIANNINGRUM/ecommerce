@@ -22,7 +22,9 @@ Route::post('/checkout', 'App\Http\Controllers\Ecommerce\CartController@processC
 Route::get('/checkout/{invoice}', 'App\Http\Controllers\Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
 
 Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
-    Route::get('login', '\App\Http\Controllers\Ecommerce\LoginController@loginForm')->name('customer.login'); 
+    Route::get('login', '\App\Http\Controllers\Ecommerce\LoginController@loginForm')->name('customer.login');
+    Route::get('register', '\App\Http\Controllers\Ecommerce\RegisterController@index')->name('customer.register');
+    Route::post('register', '\App\Http\Controllers\Ecommerce\RegisterController@register')->name('customer.register.register'); 
     Route::get('verify/{token}', '\App\Http\Controllers\Ecommerce\FrontController@verifyCustomerRegistration')->name('customer.verify');
     Route::post('login', '\App\Http\Controllers\Ecommerce\LoginController@login')->name('customer.post_login');
     Route::group(['middleware' => 'customer'], function() {
