@@ -47,7 +47,7 @@ class ProductController extends Controller
             //KEMUDIAN NAMA FILENYA KITA BUAT CUSTOMER DENGAN PERPADUAN TIME DAN SLUG DARI NAMA PRODUK. ADAPUN EXTENSIONNYA KITA GUNAKAN BAWAAN FILE TERSEBUT
             $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
             //SIMPAN FILENYA KEDALAM FOLDER PUBLIC/PRODUCTS, DAN PARAMETER KEDUA ADALAH NAMA CUSTOM UNTUK FILE TERSEBUT
-            $file->storeAs('public/products', $filename);
+            $file->move(public_path('images'), $filename);
 
             //SETELAH FILE TERSEBUT DISIMPAN, KITA SIMPAN INFORMASI PRODUKNYA KEDALAM DATABASE
             $product = Product::create([
@@ -75,8 +75,8 @@ class ProductController extends Controller
         public function destroy($id)
     {
         $product = Product::find($id); //QUERY UNTUK MENGAMBIL DATA PRODUK BERDASARKAN ID
-        //HAPUS FILE IMAGE DARI STORAGE PATH DIIKUTI DENGNA NAMA IMAGE YANG DIAMBIL DARI DATABASE
-        File::delete(storage_path('app/public/products/' . $product->image));
+        //HAPUS FILE IMAGE DARI Public images products
+        File::delete(storage_path('app/public/images/products/' . $product->image));
         //KEMUDIAN HAPUS DATA PRODUK DARI DATABASE
         $product->delete();
         //DAN REDIRECT KE HALAMAN LIST PRODUK
@@ -107,10 +107,14 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            //MAKA UPLOAD FILE TERSEBUT
-            $file->storeAs('public/products', $filename);
-            //DAN HAPUS FILE GAMBAR YANG LAMA
-            File::delete(storage_path('app/public/products/' . $product->image));
+            $file->move(public_path('images'), $filename);
+            $filepath = public_path() . DIRECTORY_SEPARATOR . 'images'
+                . DIRECTORY_SEPARATOR . $product->image;
+            try {
+                File::delete($filepath);
+            } catch (FileNotFoundException $e) {
+            }
+
         }
 
     //KEMUDIAN UPDATE PRODUK TERSEBUT
