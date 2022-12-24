@@ -11,17 +11,20 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::where('customer_id', auth()->guard('customer')->user()->id)->orderBy('created_at', 'DESC')->paginate(10);
-        return view('ecommerce.orders.index', compact('orders'));
+        $total = (new FrontController)->getCartTotal();
+        return view('ecommerce.orders.index', compact('orders', 'total'));
     }
     public function view($invoice)
     {
         $order = Order::with(['district.city.province', 'details', 'details.product', 'payment'])
             ->where('invoice', $invoice)->first();
-        return view('ecommerce.orders.view', compact('order'));
+        $total = (new FrontController)->getCartTotal();
+        return view('ecommerce.orders.view', compact('order', 'total'));
     }
     public function paymentForm()
     {
-        return view('ecommerce.payment');
+        $total = (new FrontController)->getCartTotal();
+        return view('ecommerce.payment', compact('total'));
     }
     public function storePayment(Request $request)
     {

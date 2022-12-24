@@ -101,6 +101,7 @@
 									<li class="nav-item">
 										<a href="{{ route('front.list_cart') }}" class="icons">
 											<i class="lnr lnr lnr-cart"></i>
+											<span class="badge badge-pill badge-danger">{{ $total }}</span>
 										</a>
 									</li>
 									<hr>

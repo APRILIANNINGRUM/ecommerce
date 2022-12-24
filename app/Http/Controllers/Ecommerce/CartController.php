@@ -10,6 +10,7 @@ use App\City;
 use App\District;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Customer;
+use App\Http\Controllers\Ecommerce\FrontController;
 use App\Order;
 use App\OrderDetail;
 use Illuminate\Support\Str;
@@ -18,7 +19,9 @@ use App\Mail\CustomerRegisterMail;
 use Mail;
 
 class CartController extends Controller
+
 {
+
     public function addToCart(Request $request)
     {
         $this->validate($request, [
@@ -46,10 +49,11 @@ class CartController extends Controller
         public function listCart()
     {
         $carts = json_decode(request()->cookie('dw-carts'), true);
+        $total = (new FrontController)->getCartTotal();
         $subtotal = collect($carts)->sum(function($q) {
             return $q['qty'] * $q['product_price'];
         });
-        return view('ecommerce.cart', compact('carts', 'subtotal'));
+        return view('ecommerce.cart', compact('carts', 'subtotal', 'total'));
     }
     
     public function updateCart(Request $request)
@@ -76,10 +80,11 @@ class CartController extends Controller
     {
         $provinces = Province::orderBy('created_at', 'DESC')->get();
         $carts = $this->getCarts();
+        $total = (new FrontController)->getCartTotal();
         $subtotal = collect($carts)->sum(function($q) {
             return $q['qty'] * $q['product_price'];
         });
-        return view('ecommerce.checkout', compact('provinces', 'carts', 'subtotal'));
+        return view('ecommerce.checkout', compact('provinces', 'carts', 'subtotal', 'total'));
     }
     public function getCity(Request $request)
     {
@@ -170,7 +175,8 @@ class CartController extends Controller
     public function checkoutFinish($invoice)
     {
         $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
-        return view('ecommerce.checkout_finish', compact('order'));
+        $total = (new FrontController)->getCartTotal();
+        return view('ecommerce.checkout_finish', compact('order', 'total'));
     }
 
 

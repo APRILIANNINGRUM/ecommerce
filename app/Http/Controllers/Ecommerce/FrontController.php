@@ -16,13 +16,15 @@ class FrontController extends Controller
         //MEMBUAT QUERY UNTUK MENGAMBIL DATA PRODUK YANG DIURUTKAN BERDASARKAN TGL TERBARU
         //DAN DI-LOAD 10 DATA PER PAGENYA
         $products = Product::where('status', 1)->orderBy('created_at', 'DESC')->paginate(10);
+        $total = $this->getCartTotal();
         //LOAD VIEW INDEX.BLADE.PHP DAN PASSING DATA DARI VARIABLE PRODUCTS
-        return view('ecommerce.index', compact('products'));
+        return view('ecommerce.index', compact('products', 'total'));
     }
     public function product()
-    {
+    {   
         $products = Product::orderBy('created_at', 'DESC')->paginate(12);
-        return view('ecommerce.product', compact('products'));
+        $total = $this->getCartTotal();
+        return view('ecommerce.product', compact('products', 'total'));
     }
     public function categoryProduct($slug)
     {
@@ -36,8 +38,9 @@ class FrontController extends Controller
     {
         //QUERY UNTUK MENGAMBIL SINGLE DATA BERDASARKAN SLUG-NYA
         $product = Product::with(['category'])->where('slug', $slug)->first();
-        //LOAD VIEW SHOW.BLADE.PHP DAN PASSING DATA PRODUCT
-        return view('ecommerce.show', compact('product'));
+        //get function from total cart
+        $total = $this->getCartTotal();
+        return view('ecommerce.show', compact('product', 'total'));
     }
     public function verifyCustomerRegistration($token)
     {
@@ -65,5 +68,29 @@ class FrontController extends Controller
         if (file_exists($path)) {
             return response()->file($path);
         }
+    }
+    //get total product in cart from session dw_cart
+    public function getCartTotal()
+    {
+        $total = 0;
+        if (request()->cookie('dw-carts')) {
+            $carts = json_decode(request()->cookie('dw-carts'), true);
+            foreach ($carts as $cart) {
+                $total += $cart['qty'];
+            }
+        }
+        return $total;
+    }
+
+    public function getTotal()
+    {
+        $total = 0;
+        if (request()->cookie('dw-carts')) {
+            $carts = json_decode(request()->cookie('dw-carts'), true);
+            foreach ($carts as $cart) {
+                $total += $cart['qty'];
+            }
+        }
+        return view('layouts.ecommerce', compact('total'));
     }
 }
