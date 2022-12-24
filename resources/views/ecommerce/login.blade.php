@@ -52,6 +52,16 @@
 							</div>
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="btn submit_btn">Log In</button>
+							</div>
+							<div class="col-md-12 form-group">
+									<p>Don't have an account?</p>
+                                    <a href="{{ route('customer.register') }}" class="btn btn-link px-0" type="button" style="color: #000; text-decoration: none;">
+									<button type="button" class="btn submit_btn">Register</button>
+									</a>
+
+                            </div>
+							<div class="col-md-12 form-group">
+								
 								<a href="#">Forgot Password?</a>
 							</div>
 						</form>

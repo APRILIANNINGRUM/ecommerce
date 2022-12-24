@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('city', 'App\Http\Controllers\Ecommerce\CartController@getCity'); //ROUTE API UNTUK /CITY
+Route::get('city', 'App\Http\Controllers\Ecommerce\CartController@getCityRajaongkir'); //ROUTE API UNTUK /CITY
+//route for calculate shipping cost
+Route::post('cost', 'App\Http\Controllers\Ecommerce\CartController@getCostRajaongkir'); //ROUTE API UNTUK /COST
 Route::get('district', 'App\Http\Controllers\Ecommerce\CartController@getDistrict'); //ROUTE API UNTUK /DISTRICT
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="status">Status</label>
-                                    <select name="status" class="form-control" required>
+                                    <select name="status" class="form-control" id="status" required>
                                         <option value="1" {{ old('status') == '1' ? 'selected':'' }}>Publish</option>
                                         <option value="0" {{ old('status') == '0' ? 'selected':'' }}>Draft</option>
                                     </select>

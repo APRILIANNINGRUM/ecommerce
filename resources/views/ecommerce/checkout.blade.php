@@ -5,30 +5,24 @@
 @endsection
 
 @section('content')
-    <!--================Home Banner Area =================-->
-	<!--================End Home Banner Area =================-->
 
-	<!--================Checkout Area =================-->
+<?php 
+    $total = 0;
+?>
 	<section class="checkout_area section_gap">
 		<div class="container">
 			<div class="billing_details">
 				<div class="row">
 					<div class="col-lg-8">
-            <h3>Informasi Pengiriman</h3>          
-              @if (session('error'))
-                  <div class="alert alert-danger">{{ session('error') }}</div>
-              @endif
-                        
-              
-            	<!-- REMOVE DULU VALUE ACTION-NYA JIKA INGIN MELIHATNYA DI BROWSER -->
-            	<!-- KARENA ROUTE NAME front.store_checkout BELUM DIBUAT -->
-              <form class="row contact_form" action="{{ route('front.store_checkout') }}" method="post" novalidate="novalidate">
-                            @csrf
+                        <h3>Informasi Pengiriman</h3>          
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
+                        <form class="row contact_form" action="{{ route('front.store_checkout') }}" method="post" novalidate="novalidate">
+                        @csrf
                         <div class="col-md-12 form-group p_star">
                             <label for="">Nama Lengkap</label>
                             <input type="text" class="form-control" id="first" name="customer_name" required>
-                            
-                            <!-- UNTUK MENAMPILKAN JIKA TERDAPAT ERROR VALIDASI -->
                             <p class="text-danger">{{ $errors->first('customer_name') }}</p>
                         </div>
                         <div class="col-md-6 form-group p_star">
@@ -50,15 +44,12 @@
                             <label for="">Propinsi</label>
                             <select class="form-control" name="province_id" id="province_id" required>
                                 <option value="">Pilih Propinsi</option>
-                              	<!-- LOOPING DATA PROVINCE UNTUK DIPILIH OLEH CUSTOMER -->
                                 @foreach ($provinces as $row)
                                 <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
                             </select>
                             <p class="text-danger">{{ $errors->first('province_id') }}</p>
                         </div>
-                
-                  <!-- ADAPUN DATA KOTA DAN KECAMATAN AKAN DI RENDER SETELAH PROVINSI DIPILIH -->
                         <div class="col-md-12 form-group p_star">
                             <label for="">Kabupaten / Kota</label>
                             <select class="form-control" name="city_id" id="city_id" required>
@@ -73,7 +64,23 @@
                             </select>
                             <p class="text-danger">{{ $errors->first('district_id') }}</p>
                         </div>
-                <!-- ADAPUN DATA KOTA DAN KECAMATAN AKAN DI RENDER SETELAH PROVINSI DIPILIH -->
+                        <div class="col-md-12 form-group p_star">
+                            <label for="">Kurir</label>
+                            <select class="form-control" name="courier" id="courier" required>
+                                <option value="">Pilih Kurir</option>
+                                <option value="jne">JNE</option>
+                                <option value="tiki">TIKI</option>
+                                <option value="pos">POS INDONESIA</option>
+                            </select>
+                        <p class="text-danger">{{ $errors->first('courier') }}</p>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <label for="">Layanan</label>
+                            <select class="form-control" name="cost" id="cost" required>
+                                <option value="">Pilih Layanan Kurir</option>
+                            </select>
+                            <p class="text-danger">{{ $errors->first('cost') }}</p>
+                        </div>
                     
 					</div>
 					<div class="col-lg-4">
@@ -84,58 +91,56 @@
 									<a href="#">Product
 										<span>Total</span>
 									</a>
-                </li>
-                @foreach ($carts as $cart)
-								<li>
-									<a href="#">{{ \Str::limit($cart['product_name'], 10) }}
-                    <span class="middle">x {{ $cart['qty'] }}</span>
-                    <span class="last">Rp {{ number_format($cart['product_price']) }}</span>
-									</a>
-                </li>
-                @endforeach
+                                </li>
+                                    @foreach ($carts as $cart)
+                                <li>
+                                    <a href="#">{{ \Str::limit($cart['product_name'], 10) }}
+                                        <span class="middle">x {{ $cart['qty'] }}</span>
+                                        <span class="last">Rp {{ number_format($cart['product_price']) }}</span>
+                                    </a>
+                                </li>
+                                <input type="hidden" name="weight" id="weight" value="{{ $cart['product_weight'] * $cart['qty'] }}">
+                                @endforeach
 							</ul>
 							<ul class="list list_2">
 								<li>
-									<a href="#">Subtotal
-                    <span>Rp {{ number_format($subtotal) }}</span>
+									<a href="#">Subtotal Product
+                                        <span>Rp {{ number_format($subtotal) }}</span>
 									</a>
 								</li>
 								<li>
 									<a href="#">Pengiriman
-										<span>Rp 0</span>
+                                        <span id="ongkir_cost"></span>
 									</a>
 								</li>
 								<li>
-									<a href="#">Total
-										<span>Rp {{ number_format($subtotal) }}</span>
-									</a>
+                                
+                                    <label for=""><a href="#">Total Pesanan</label>
+                                    <select class="form-control" name="total" id="total" required>
+                                        
+                                    </select>
+                                    <p class="text-danger">{{ $errors->first('total') }}</p>
+                                
 								</li>
 							</ul>
-              <button class="main_btn">Bayar Pesanan</button>
-              </form>
+                            <button class="main_btn">Bayar Pesanan</button>
+                            </form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!--================End Checkout Area =================-->
 @endsection
 @section('js')
     <script>
-        //KETIKA SELECT BOX DENGAN ID province_id DIPILIH
         $('#province_id').on('change', function() {
-            //MAKA AKAN MELAKUKAN REQUEST KE URL /API/CITY
-            //DAN MENGIRIMKAN DATA PROVINCE_ID
             $.ajax({
                 url: "{{ url('/api/city') }}",
                 type: "GET",
                 data: { province_id: $(this).val() },
                 success: function(html){
-                    //SETELAH DATA DITERIMA, SELEBOX DENGAN ID CITY_ID DI KOSONGKAN
                     $('#city_id').empty()
-                    //KEMUDIAN APPEND DATA BARU YANG DIDAPATKAN DARI HASIL REQUEST VIA AJAX
-                    //UNTUK MENAMPILKAN DATA KABUPATEN / KOTA
                     $('#city_id').append('<option value="">Pilih Kabupaten/Kota</option>')
                     $.each(html.data, function(key, item) {
                         $('#city_id').append('<option value="'+item.id+'">'+item.name+'</option>')
@@ -144,7 +149,6 @@
             });
         })
 
-        //LOGICNYA SAMA DENGAN CODE DIATAS HANYA BERBEDA OBJEKNYA SAJA
         $('#city_id').on('change', function() {
             $.ajax({
                 url: "{{ url('/api/district') }}",
@@ -159,5 +163,33 @@
                 }
             });
         })
+        
+        $('#courier').on('change', function() {
+            $.ajax({
+                url: "{{ url('/api/cost') }}",
+                type: "POST",
+                data: {
+                    origin: 114,
+                    city_id: $('#city_id').val(),
+                    weight: $('#weight').val(),
+                    courier: $(this).val()
+                },
+                success: function(html){
+                    $('#cost').empty()
+                    $('#cost').append('<option value="">Pilih Layanan</option>')
+                     $.each(html.data.rajaongkir.results[0].costs, function(key, item) {
+                            $('#cost').append('<option value="'+item.cost[0].value+'">'+item.service+' - '+item.cost[0].value+'</option>')
+                      })
+                }
+            });
+        })
+        
+        $('#cost').on('change', function() {
+            $('#ongkir_cost').text($(this).val())
+            $('#total_cost').text(parseInt($(this).val()) + parseInt({{ $subtotal }}))
+            $total = parseInt($(this).val()) + parseInt({{ $subtotal }})
+            $('#total').append('<option value="'+$total+'">'+$total+'</option>')
+        })
+
     </script>
 @endsection

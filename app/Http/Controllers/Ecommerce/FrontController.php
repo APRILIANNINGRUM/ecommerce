@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use File;
 use App\Category;
 use App\Customer;
 
@@ -14,7 +15,7 @@ class FrontController extends Controller
     {
         //MEMBUAT QUERY UNTUK MENGAMBIL DATA PRODUK YANG DIURUTKAN BERDASARKAN TGL TERBARU
         //DAN DI-LOAD 10 DATA PER PAGENYA
-        $products = Product::orderBy('created_at', 'DESC')->paginate(10);
+        $products = Product::where('status', 1)->orderBy('created_at', 'DESC')->paginate(10);
         //LOAD VIEW INDEX.BLADE.PHP DAN PASSING DATA DARI VARIABLE PRODUCTS
         return view('ecommerce.index', compact('products'));
     }
@@ -54,5 +55,15 @@ class FrontController extends Controller
         //JIKA TIDAK ADA, MAKA REDIRECT KE HALAMAN LOGIN
         //DENGAN MENGIRIMKAN FLASH SESSION ERROR
         return redirect(route('customer.login'))->with(['error' => 'Invalid Verifikasi Token']);
+    }
+    public function getImage($filename)
+    {
+        //FUNGSI INI UNTUK MENGAMBIL FILE IMAGE DARI FOLDER PUBLIC/PRODUCTS
+        //get from public/images
+        $path = storage_path('app/public/images/' . $filename);
+        //JIKA FILENYA ADA MAKA KITA TAMPILKAN
+        if (file_exists($path)) {
+            return response()->file($path);
+        }
     }
 }
