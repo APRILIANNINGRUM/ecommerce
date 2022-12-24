@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use File;
 use App\Category;
 use App\Customer;
 
@@ -54,5 +55,15 @@ class FrontController extends Controller
         //JIKA TIDAK ADA, MAKA REDIRECT KE HALAMAN LOGIN
         //DENGAN MENGIRIMKAN FLASH SESSION ERROR
         return redirect(route('customer.login'))->with(['error' => 'Invalid Verifikasi Token']);
+    }
+    public function getImage($filename)
+    {
+        //FUNGSI INI UNTUK MENGAMBIL FILE IMAGE DARI FOLDER PUBLIC/PRODUCTS
+        //get from public/images
+        $path = storage_path('app/public/images/' . $filename);
+        //JIKA FILENYA ADA MAKA KITA TAMPILKAN
+        if (file_exists($path)) {
+            return response()->file($path);
+        }
     }
 }

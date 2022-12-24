@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->string('customer_address');
+            $table->string('courier');
             $table->unsignedBigInteger('district_id'); //FIELD INI AKAN MERUJUK KE TABLE districts
             $table->integer('subtotal');
             $table->timestamps();

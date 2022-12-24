@@ -11,6 +11,10 @@
 |
 */
 Route::get('/', 'App\Http\Controllers\Ecommerce\FrontController@index')->name('front.index');
+
+
+//image route for product
+Route::get('/image/{filename}', 'App\Http\Controllers\Ecommerce\FrontController@getImage')->name('image');
 Route::get('/category/{slug}', 'App\Http\Controllers\Ecommerce\FrontController@categoryProduct')->name('front.category');
 Route::get('/product/{slug}', 'App\Http\Controllers\Ecommerce\FrontController@show')->name('front.show_product');
 Route::get('/product', 'App\Http\Controllers\Ecommerce\FrontController@product')->name('front.product');

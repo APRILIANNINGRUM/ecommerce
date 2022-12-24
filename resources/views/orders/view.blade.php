@@ -45,7 +45,11 @@
                                         </tr>
                                         <tr>
                                             <th>Alamat</th>
-                                            <td>{{ $order->customer_address }} {{ $order->customer->district->name }} - {{  $order->customer->district->city->name}}, {{ $order->customer->district->city->province->name }}</td>
+                                            <td>{{ $order->customer_address }} {{ $order->district->name }} - {{  $order->district->city->name}}, {{ $order->district->city->province->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kurir</th>
+                                            <td>{{ $order->courier }}</td>
                                         </tr>
                                         <tr>
                                             <th>Order Status</th>

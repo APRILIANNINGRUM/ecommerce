@@ -8,6 +8,7 @@ use App\Product;
 use App\Province;
 use App\City;
 use App\District;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Customer;
 use App\Order;
 use App\OrderDetail;
@@ -33,6 +34,7 @@ class CartController extends Controller
             $carts[$request->product_id] = [
                 'qty' => $request->qty,
                 'product_id' => $product->id,
+                'product_weight' => $product->weight,
                 'product_name' => $product->name,
                 'product_price' => $product->price,
                 'product_image' => $product->image
@@ -99,6 +101,7 @@ class CartController extends Controller
             'customer_address' => 'required|string',
             'province_id' => 'required|exists:provinces,id',
             'city_id' => 'required|exists:cities,id',
+            'courier' => 'required',
             'district_id' => 'required|exists:districts,id'
         ]);
 
@@ -136,7 +139,8 @@ class CartController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'customer_address' => $request->customer_address,
                 'district_id' => $request->district_id,
-                'subtotal' => $subtotal
+                'courier' => $request->courier,
+                'subtotal' => $request->total
             ]);
 
             foreach ($carts as $row) {
@@ -168,4 +172,44 @@ class CartController extends Controller
         $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
         return view('ecommerce.checkout_finish', compact('order'));
     }
+
+
+    public function getCityRajaongkir(Request $request)
+    {
+        $cities = City::where('province_id', request()->province_id)->get();
+        return response()->json(['status' => 'success', 'data' => $cities]);
+    }
+
+    public function getCostRajaongkir(Request $request)
+    {
+        $origin = 398;
+        $destination = request()->city_id;
+        $weight = request()->weight;
+        $courier = request()->courier;
+        $key = env('RAJAONGKIR_API_KEY');
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=$origin&destination=$destination&weight=$weight&courier=$courier",
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded",
+                "key: $key"
+            ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            return response()->json(['status' => 'error', 'message' => $err]);
+        } else {
+            return response()->json(['status' => 'success', 'data' => json_decode($response, true)]);
+        }
+    }
+
 }
