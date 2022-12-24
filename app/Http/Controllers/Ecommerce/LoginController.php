@@ -11,7 +11,8 @@ class LoginController extends Controller
     public function loginForm()
     {
         if (auth()->guard('customer')->check()) return redirect(route('customer.dashboard'));
-        return view('ecommerce.login');
+        $total = (new FrontController)->getCartTotal();
+        return view('ecommerce.login', compact('total'));
     }
     public function login(Request $request)
     {
@@ -41,8 +42,8 @@ class LoginController extends Controller
             COALESCE(count(CASE WHEN status = 3 THEN subtotal END), 0) as shipping,
             COALESCE(count(CASE WHEN status = 4 THEN subtotal END), 0) as completeOrder')
             ->where('customer_id', auth()->guard('customer')->user()->id)->get();
-
-        return view('ecommerce.dashboard', compact('orders'));
+        $total = (new FrontController)->getCartTotal();
+        return view('ecommerce.dashboard', compact('orders', 'total'));
     }
     public function logout()
     {

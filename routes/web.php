@@ -11,9 +11,10 @@
 |
 */
 Route::get('/', 'App\Http\Controllers\Ecommerce\FrontController@index')->name('front.index');
+Route::get('/total/cart','App\Http\Controllers\Ecommerce\FrontController@getCartTotal')->name('front.getCartTotal');
 
 
-//image route for product
+
 Route::get('/image/{filename}', 'App\Http\Controllers\Ecommerce\FrontController@getImage')->name('image');
 Route::get('/category/{slug}', 'App\Http\Controllers\Ecommerce\FrontController@categoryProduct')->name('front.category');
 Route::get('/product/{slug}', 'App\Http\Controllers\Ecommerce\FrontController@show')->name('front.show_product');

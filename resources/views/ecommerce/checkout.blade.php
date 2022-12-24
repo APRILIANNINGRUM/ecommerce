@@ -22,17 +22,17 @@
                         @csrf
                         <div class="col-md-12 form-group p_star">
                             <label for="">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="first" name="customer_name" required>
+                            <input type="text" class="form-control" id="first" name="customer_name" value="{{ auth()->guard('customer')->check() ? auth()->guard('customer')->user()->name : '' }}" required>
                             <p class="text-danger">{{ $errors->first('customer_name') }}</p>
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <label for="">No Telp</label>
-                            <input type="text" class="form-control" id="number" name="customer_phone" required>
+                            <input type="text" class="form-control" id="number" name="customer_phone" value="{{ auth()->guard('customer')->check() ? auth()->guard('customer')->user()->phone_number : '' }}" required>
                             <p class="text-danger">{{ $errors->first('customer_phone') }}</p>
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <label for="">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ auth()->guard('customer')->check() ? auth()->guard('customer')->user()->email : '' }}" required>
                             <p class="text-danger">{{ $errors->first('email') }}</p>
                         </div>
                         <div class="col-md-12 form-group p_star">
@@ -114,15 +114,13 @@
 									</a>
 								</li>
 								<li>
-                                
-                                    <label for=""><a href="#">Total Pesanan</label>
-                                    <select class="form-control" name="total" id="total" required>
-                                        
-                                    </select>
-                                    <p class="text-danger">{{ $errors->first('total') }}</p>
-                                
+                                    <a href="#">Total Pesanan
+                                        <span id="total_cost"></span>
+									</a>
+                                    <input type="hidden" name="total" id="total">
 								</li>
 							</ul>
+                            <br>
                             <button class="main_btn">Bayar Pesanan</button>
                             </form>
 						</div>
@@ -188,7 +186,8 @@
             $('#ongkir_cost').text($(this).val())
             $('#total_cost').text(parseInt($(this).val()) + parseInt({{ $subtotal }}))
             $total = parseInt($(this).val()) + parseInt({{ $subtotal }})
-            $('#total').append('<option value="'+$total+'">'+$total+'</option>')
+            $('#total').val($total)
+
         })
 
     </script>

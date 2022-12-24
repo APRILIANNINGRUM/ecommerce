@@ -50,7 +50,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6">
                             <div class="f_p_item">
                                 <div class="f_p_img">
-                                    <img class="img-fluid" src="{{ asset('storage/products/' . $row->image) }}" alt="{{ $row->name }}">
+                                    <img class="img-fluid" src="{{ asset('images/' . $row->image) }}" alt="{{ $row->name }}">
                                     <div class="p_icon">
                                         <a href="{{ url('/product/' . $row->slug) }}">
                                             <i class="lnr lnr-cart"></i>

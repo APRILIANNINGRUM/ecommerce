@@ -14,7 +14,8 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('ecommerce.register');
+        $total = (new FrontController)->getCartTotal();
+        return view('ecommerce.register', compact('total'));
     }
     public function register(Request $request)
     {
