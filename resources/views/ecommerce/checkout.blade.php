@@ -114,15 +114,13 @@
 									</a>
 								</li>
 								<li>
-                                
-                                    <label for=""><a href="#">Total Pesanan</label>
-                                    <select class="form-control" name="total" id="total" required>
-                                        
-                                    </select>
-                                    <p class="text-danger">{{ $errors->first('total') }}</p>
-                                
+                                    <a href="#">Total Pesanan
+                                        <span id="total_cost"></span>
+									</a>
+                                    <input type="hidden" name="total" id="total">
 								</li>
 							</ul>
+                            <br>
                             <button class="main_btn">Bayar Pesanan</button>
                             </form>
 						</div>
@@ -188,7 +186,8 @@
             $('#ongkir_cost').text($(this).val())
             $('#total_cost').text(parseInt($(this).val()) + parseInt({{ $subtotal }}))
             $total = parseInt($(this).val()) + parseInt({{ $subtotal }})
-            $('#total').append('<option value="'+$total+'">'+$total+'</option>')
+            $('#total').val($total)
+
         })
 
     </script>
