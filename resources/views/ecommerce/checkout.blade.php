@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <label for="">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ auth()->guard('customer')->check() ? auth()->guard('customer')->user()->email : '' }}" readonly>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ auth()->guard('customer')->check() ? auth()->guard('customer')->user()->email : '' }}" required>
                             <p class="text-danger">{{ $errors->first('email') }}</p>
                         </div>
                         <div class="col-md-12 form-group p_star">
