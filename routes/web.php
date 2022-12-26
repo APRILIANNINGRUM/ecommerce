@@ -13,8 +13,6 @@
 Route::get('/', 'App\Http\Controllers\Ecommerce\FrontController@index')->name('front.index');
 Route::get('/total/cart','App\Http\Controllers\Ecommerce\FrontController@getCartTotal')->name('front.getCartTotal');
 
-//get route paymentMidtrans with param invoice
-Route::get('/paymentMidtrans/{invoice}', 'App\Http\Controllers\Ecommerce\CartController@paymentMidtrans')->name('front.paymentMidtrans');
 
 Route::get('/image/{filename}', 'App\Http\Controllers\Ecommerce\FrontController@getImage')->name('image');
 Route::get('/category/{slug}', 'App\Http\Controllers\Ecommerce\FrontController@categoryProduct')->name('front.category');

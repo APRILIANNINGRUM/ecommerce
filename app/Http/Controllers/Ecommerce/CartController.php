@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Payment;
 use App\Province;
 use App\City;
 use App\District;
@@ -175,6 +176,9 @@ class CartController extends Controller
     public function checkoutFinish($invoice)
     {
         $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
+        if (!$order) {
+            abort(404);
+        }
         $total = (new FrontController)->getCartTotal();
         \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         \Midtrans\Config::$isProduction = false;
@@ -241,49 +245,114 @@ class CartController extends Controller
         }
     }
 
-    public function paymentMidtrans(Request $request)
-    {
-        $invoice = $request->invoice;
-        $order = Order::with(['district.city.province'])->where('invoice', $invoice)->first();
-        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$isSanitized = true;
-        \Midtrans\Config::$is3ds = true;
-        $transaction_details = array(
-            'order_id' => $order->invoice,
-            'gross_amount' => $order->subtotal,
-        );
-        $customer_details = array(
-            'first_name' => $order->customer_name,
-            'email' => $order->customer->email,
-            'phone' => $order->customer_phone,
-        );
-        $order = Order::with(['details.product'])->where('invoice', $invoice)->first();
-
-        $enable_payments = array('gopay', 'bank_transfer', 'credit_card');
-        $transaction_data = array(
-            'transaction_details' => $transaction_details,
-            'customer_details' => $customer_details,
-            'enabled_payments' => $enable_payments,
-            'order' => $order,
-        );
-        $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
-        return view('ecommerce.payment_midtrans', compact ('snapToken', 'order'));
-    }
-
-    public function midtransCallback(request $request)
+    public function midtransCallback(Request $request)
     {
         $serverKey = config('midtrans.server_key');
         $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+
+        $order = Order::where('invoice', $request->order_id)->first();
+        if (!$order) {
+            return view('errors.404');
+        }
         if($hashed == $request->signature_key){
             if($request->transaction_status == 'capture'){
+                if($request->status_code == '200'){
+                    $order = Order::where('invoice', $request->order_id)->first();
+                    $order->update([
+                        'status' => 1,
+                    ]);
+
+                    $payment = Payment::create([
+                        'order_id' => $order->id,
+                        'name' => $order->customer_name,
+                        'transfer_to' => $request->payment_type . ' - ' . $request->bank,
+                        'transfer_date' => date('Y-m-d'),
+                        'amount' => $order->subtotal,
+                        'status' => 1,
+                        'proof' => 'Midtrans',
+                    ]);
+                }
+            }else if($request->transaction_status == 'settlement'){
                 $order = Order::where('invoice', $request->order_id)->first();
                 $order->update([
                     'status' => 1,
                 ]);
+
+                $payment = Payment::create([
+                    'order_id' => $order->id,
+                    'name' => $order->customer_name,
+                    'transfer_to' => $request->payment_type . ' - ' . $request->bank,
+                    'transfer_date' => date('Y-m-d'),
+                    'amount' => $order->subtotal,
+                    'status' => 1,
+                    'proof' => 'Midtrans',
+                ]);
+            }else if($request->transaction_status == 'pending'){
+                $order = Order::where('invoice', $request->order_id)->first();
+                $order->update([
+                    'status' => 0,
+                ]);
+
+                $payment = Payment::create([
+                    'order_id' => $order->id,
+                    'name' => $order->customer_name,
+                    'transfer_to' => $request->payment_type . ' - ' . $request->bank,
+                    'transfer_date' => date('Y-m-d'),
+                    'amount' => $order->subtotal,
+                    'status' => 2,
+                    'proof' => 'Midtrans',
+                ]);
+            }else if($request->transaction_status == 'deny'){
+                $order = Order::where('invoice', $request->order_id)->first();
+                $order->update([
+                    'status' => 0,
+                ]);
+
+                $payment = Payment::create([
+                    'order_id' => $order->id,
+                    'name' => $order->customer_name,
+                    'transfer_to' => $request->payment_type . ' - ' . $request->bank,
+                    'transfer_date' => date('Y-m-d'),
+                    'amount' => $order->subtotal,
+                    'status' => 0,
+                    'proof' => 'Midtrans',
+                ]);
+            }else if($request->transaction_status == 'expire'){
+                $order = Order::where('invoice', $request->order_id)->first();
+                $order->update([
+                    'status' => 0,
+                ]);
+
+                $payment = Payment::create([
+                    'order_id' => $order->id,
+                    'name' => $order->customer_name,
+                    'transfer_to' => $request->payment_type . ' - ' . $request->bank,
+                    'transfer_date' => date('Y-m-d'),
+                    'amount' => $order->subtotal,
+                    'status' => 0,
+                    'proof' => 'Midtrans',
+                ]);
+            }else if($request->transaction_status == 'cancel'){
+                $order = Order::where('invoice', $request->order_id)->first();
+                $order->update([
+                    'status' => 0,
+                ]);
+
+                $payment = Payment::create([
+                    'order_id' => $order->id,
+                    'name' => $order->customer_name,
+                    'transfer_to' => $request->payment_type . ' - ' . $request->bank,
+                    'transfer_date' => date('Y-m-d'),
+                    'amount' => $order->subtotal,
+                    'status' => 0,
+                    'proof' => 'Midtrans',
+                ]);
+                
             }
+            
         }
 
     }
     
 }
+ 

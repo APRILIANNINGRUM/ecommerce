@@ -31,28 +31,9 @@
 		<div class="container">
 			<h3 class="title_confirmation">Terima kasih, pesanan anda telah kami terima.</h3>
 			<div class="row order_d_inner">
-				<div class="col-lg-6">
+				<div class="col-lg-8">
 					<div class="details_item">
-						<h4>Informasi Pesanan</h4>
-						<ul class="list">
-							<li>
-								<a href="#">
-                  <span>Invoice</span> : {{ $order->invoice }}</a>
-							</li>
-							<li>
-								<a href="#">
-                  <span>Tanggal</span> : {{ $order->created_at }}</a>
-							</li>
-							<li>
-								<a href="#">
-                  <span>Total</span> : Rp {{ number_format($order->subtotal) }}</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="details_item">
-						<h4>Informasi Pemesan</h4>
+					<h4>Informasi Pemesan</h4>
 						<ul class="list">
 							<li>
 								<a href="#">
@@ -69,19 +50,40 @@
 						</ul>
 					</div>
 				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+					<h4>Informasi Pesanan</h4>
+						<ul class="list">
+							<li>
+								<a href="#">
+                  <span>Invoice</span> : {{ $order->invoice }}</a>
+							</li>
+							<li>
+								<a href="#">
+                  <span>Tanggal</span> : {{ $order->created_at }}</a>
+							</li>
+							<li>
+								<a href="#">
+                  <span>Total</span> : Rp {{ number_format($order->subtotal) }}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
 	<!--button pay-->
+	<center>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="payment-adress">
-					<button id="pay-button" class="btn btn-primary">Pay Now</button>
+					<button id="pay-button" class="btn btn-primary" style="width:200px">Pay Now</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	</center>
   <!--================End Order Details Area =================-->
 @endsection
 <!-- script -->
