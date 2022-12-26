@@ -50,7 +50,7 @@
 								<td>
 									<div class="media">
 										<div class="d-flex">
-                                            <img src="{{ asset('storage/products/' . $row['product_image']) }}" width="100px" height="100px" alt="{{ $row['product_name'] }}">
+                                            <img src="{{ asset('images/' . $row['product_image']) }}" width="100px" height="100px" alt="{{ $row['product_name'] }}">
 										</div>
 										<div class="media-body">
                                             <p>{{ $row['product_name'] }}</p>

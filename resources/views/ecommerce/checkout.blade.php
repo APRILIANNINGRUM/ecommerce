@@ -121,7 +121,7 @@
 								</li>
 							</ul>
                             <br>
-                            <button class="main_btn">Bayar Pesanan</button>
+                            <button class="main_btn" id="pay-button" >Bayar Pesanan</button>
                             </form>
 						</div>
 					</div>
@@ -131,7 +131,7 @@
 	</section>
 @endsection
 @section('js')
-    <script>
+    <script type="text/javascript">
         $('#province_id').on('change', function() {
             $.ajax({
                 url: "{{ url('/api/city') }}",

@@ -218,4 +218,49 @@ class CartController extends Controller
         }
     }
 
+    public function paymentMidtrans(Request $request)
+    {
+        $invoice = $request->invoice;
+        $order = Order::with(['district.city.province'])->where('invoice', $invoice)->first();
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+        $transaction_details = array(
+            'order_id' => $order->invoice,
+            'gross_amount' => $order->subtotal,
+        );
+        $customer_details = array(
+            'first_name' => $order->customer_name,
+            'email' => $order->customer->email,
+            'phone' => $order->customer_phone,
+        );
+        $order = Order::with(['details.product'])->where('invoice', $invoice)->first();
+
+        $enable_payments = array('gopay', 'bank_transfer', 'credit_card');
+        $transaction_data = array(
+            'transaction_details' => $transaction_details,
+            'customer_details' => $customer_details,
+            'enabled_payments' => $enable_payments,
+            'order' => $order,
+        );
+        $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
+        return view('ecommerce.payment_midtrans', compact ('snapToken', 'order'));
+    }
+
+    public function midtransCallback(request $request)
+    {
+        $serverKey = config('midtrans.server_key');
+        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        if($hashed == $request->signature_key){
+            if($request->transaction_status == 'capture'){
+                $order = Order::where('invoice', $request->order_id)->first();
+                $order->update([
+                    'status' => 1,
+                ]);
+            }
+        }
+
+    }
+    
 }

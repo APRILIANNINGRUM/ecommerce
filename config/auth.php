@@ -77,7 +77,7 @@ return [
             'model' => App\User::class,
         ],
 
-      	/* TAMBAHKAN CODE INI */
+      	/* TAMBAHKAN CODEINI  */
         'customers' => [
             'driver' => 'eloquent',
             'model' => App\Customer::class,

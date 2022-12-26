@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $guarded = [];
+    protected $fillable = ['id','status','invoice'];
     protected $appends = ['status_label'];
 
     public function district()
@@ -37,5 +38,9 @@ class Order extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

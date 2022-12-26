@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Ecommerce\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +21,5 @@ Route::get('district', 'App\Http\Controllers\Ecommerce\CartController@getDistric
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/midtrans-callback', 'App\Http\Controllers\Ecommerce\CartController@midtransCallback');
