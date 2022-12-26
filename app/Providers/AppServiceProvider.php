@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('ecommerce.*', 'App\Http\View\CategoryComposer');
+        if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) 
+        &&  $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 }
