@@ -5,9 +5,9 @@
 @endsection
 
 <!--to load js-->
-@section('js')
-	<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{config('midtrans.client_key')}}"></script>
-@endsection
+
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{config('midtrans.client_key')}}"></script>
+
 
 @section('content')
     <!--================Home Banner Area =================-->
@@ -85,8 +85,8 @@
   <!--================End Order Details Area =================-->
 @endsection
 <!-- script -->
-@section('script')
-<script type="text/javascript">
+@section('js')
+<script>
       // For example trigger on button clicked, or any time you need
       var payButton = document.getElementById('pay-button');
       payButton.addEventListener('click', function () {

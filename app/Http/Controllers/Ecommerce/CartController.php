@@ -176,30 +176,30 @@ class CartController extends Controller
     {
         $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
         $total = (new FrontController)->getCartTotal();
-        // \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        // \Midtrans\Config::$isProduction = false;
-        // \Midtrans\Config::$isSanitized = true;
-        // \Midtrans\Config::$is3ds = true;
-        // $transaction_details = array(
-        //     'order_id' => $order->invoice,
-        //     'gross_amount' => $order->subtotal,
-        // );
-        // $customer_details = array(
-        //     'first_name' => $order->customer_name,
-        //     'email' => $order->customer->email,
-        //     'phone' => $order->customer_phone,
-        // );
-        // $order = Order::with(['details.product'])->where('invoice', $invoice)->first();
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+        $transaction_details = array(
+            'order_id' => $order->invoice,
+            'gross_amount' => $order->subtotal,
+        );
+        $customer_details = array(
+            'first_name' => $order->customer_name,
+            'email' => $order->customer->email,
+            'phone' => $order->customer_phone,
+        );
+        $order = Order::with(['details.product'])->where('invoice', $invoice)->first();
 
-        // $enable_payments = array('gopay', 'bank_transfer', 'credit_card');
-        // $transaction_data = array(
-        //     'transaction_details' => $transaction_details,
-        //     'customer_details' => $customer_details,
-        //     'enabled_payments' => $enable_payments,
-        //     'order' => $order,
-        // );
-        // $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
-        return view('ecommerce.checkout_finish', compact('order', 'total'));
+        $enable_payments = array('gopay', 'bank_transfer', 'credit_card');
+        $transaction_data = array(
+            'transaction_details' => $transaction_details,
+            'customer_details' => $customer_details,
+            'enabled_payments' => $enable_payments,
+            'order' => $order,
+        );
+        $snapToken = \Midtrans\Snap::getSnapToken($transaction_data);
+        return view('ecommerce.checkout_finish', compact('order', 'total', 'snapToken','order'));
     }
 
 
