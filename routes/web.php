@@ -11,7 +11,6 @@
 |
 */
 Route::get('/', 'App\Http\Controllers\Ecommerce\FrontController@index')->name('front.index');
-Route::get('/total/cart','App\Http\Controllers\Ecommerce\FrontController@getCartTotal')->name('front.getCartTotal');
 
 
 Route::get('/image/{filename}', 'App\Http\Controllers\Ecommerce\FrontController@getImage')->name('image');
