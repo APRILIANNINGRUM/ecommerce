@@ -55,7 +55,7 @@
                                             <th>Order Status</th>
                                             <td>{!! $order->status_label !!}</td>
                                         </tr>
-                                        <!-- FORM INPUT RESI HANYA AKAN TAMPIL JIKA STATUS LEBIH BESAR 1 -->
+                                    
                                         @if ($order->status > 1)
                                         <tr>
                                             <th>Nomor Resi</th>
@@ -127,6 +127,10 @@
                                             <td>Rp {{ $row->qty * $row->price }}</td>
                                         </tr>
                                         @endforeach
+                                        <tr>
+                                            <td colspan="4" align="right"><strong>Total Pesanan + Ongkir</strong>
+                                            <strong><td>Rp. {{ number_format($order->subtotal) }}</td></strong></td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
