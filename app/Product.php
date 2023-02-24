@@ -29,4 +29,9 @@ class Product extends Model
     {
         $this->attributes['slug'] = Str::slug($value); 
     }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

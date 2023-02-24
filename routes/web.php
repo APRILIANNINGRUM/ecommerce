@@ -20,6 +20,8 @@ Route::post('/cart/update', 'App\Http\Controllers\Ecommerce\CartController@updat
 Route::get('/checkout', 'App\Http\Controllers\Ecommerce\CartController@checkout')->name('front.checkout');
 Route::post('/checkout', 'App\Http\Controllers\Ecommerce\CartController@processCheckout')->name('front.store_checkout');
 Route::get('/checkout/{invoice}', 'App\Http\Controllers\Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
+Route::get('/signup','App\Http\Controllers\Ecommerce\RegisterController@index')->name('signup');
+Route::post('/signup','App\Http\Controllers\Ecommerce\RegisterController@store')->name('signup');
 
 Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
     Route::get('login', '\App\Http\Controllers\Ecommerce\LoginController@loginForm')->name('customer.login'); 

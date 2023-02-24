@@ -58,6 +58,10 @@
                                             <li><a href="">Contact Us</a></li>
                                         </ul>
                                     </li>
+                                    <li class="user">
+                                        <span><a href="{{ route('customer.post_login')}}">Login</a></span>&nbsp;/&nbsp;
+                                        <span><a href="{{ route('signup')}}">Register</a></span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="canvas_open">

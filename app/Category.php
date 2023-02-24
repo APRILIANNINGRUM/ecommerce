@@ -37,4 +37,5 @@ class Category extends Model
         //JENIS RELASINYA ADALAH ONE TO MANY, YANG BERARTI KATEGORI INI BISA DIGUNAKAN OLEH BANYAK PRODUK
         return $this->hasMany(Product::class);
     }
+    
 }
