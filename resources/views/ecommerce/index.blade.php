@@ -5,6 +5,126 @@
 @endsection
 
 @section('content')
+<section class="slider_section mb-170">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider_swiper swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="single_slider swiper-slide d-flex align-items-center">
+                                <div class="slider_text">
+                                    <h2>Make your Home Feel <br> Comfortable</h2>
+                                    <div class="slider_text_shape">
+                                        <!-- <img src="assets/img/slider/slider-text-shape.png" alt=""> -->
+                                        <img src="{{ asset('furnitures/assets/img/slider/slider-text-shape.png')}}" alt="">
+                                        <div class="slider_btn">
+                                            <a class="btn btn-link" href="shop-left-sidebar.html">SHOP NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="slider_thumb">
+                                    <!-- <img src="assets/img/slider/slider-shape1.png" alt=""> -->
+                                    <img src="{{ asset('furnitures/assets/img/slider/slider-shape1.png')}}" alt="">
+                                </div>
+                            </div>
+                            <div class="single_slider swiper-slide d-flex align-items-center">
+                                <div class="slider_text">
+                                    <h2>Make your Home Feel Better</h2>
+                                    <div class="slider_text_shape">
+                                        <!-- <img src="assets/img/slider/slider-text-shape.png" alt=""> -->
+                                        <img src="{{ asset('furnitures/assets/img/slider/slider-text-shape.png')}}" alt="">
+                                        <div class="slider_btn">
+                                            <a class="btn btn-link" href="shop-left-sidebar.html">SHOP NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="slider_thumb">
+                                    <!-- <img src="assets/img/slider/slider-shape1.png" alt=""> -->
+                                    <img src="{{ asset('furnitures/assets/img/slider/slider-shape1.png')}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add Arrows -->
+                        <!-- <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- choice section start -->
+  <section class="choice_section mb-175">
+        <div class="container">
+            <div class="section_title text-center mb-105">
+                <h2>Best Choice For You</h2>
+            </div>
+            <div class="choice_container">
+                <div class="row choice_slick slick_slider_activation" data-slick='{
+                    "slidesToShow": 3,
+                    "slidesToScroll": 1,
+                    "arrows": true,
+                    "dots": false,
+                    "autoplay": false,
+                    "speed": 300,
+                    "infinite": true,
+                    "responsive":[
+                        {"breakpoint":992, "settings": { "slidesToShow": 2 } },  
+                        {"breakpoint":768, "settings": { "slidesToShow": 2 } },  
+                        {"breakpoint":480, "settings": { "slidesToShow": 1 } }  
+                    ]                                                         
+                }'>
+                    <div class="col-lg-4">
+                        <div class="single_choice wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
+                            <div class="choice_thumb">
+                                <!-- <img src="assets/img/others/choice1.png" alt=""> -->
+                                <img src="{{ asset('furnitures/assets/img/others/choice1.png')}}" alt="">
+                            </div>
+                            <div class="choice_text">
+                                <h4><a href="#">for Living room</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single_choice wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
+                            <div class="choice_thumb">
+                                <!-- <img src="assets/img/others/choice2.png" alt=""> -->
+                                <img src="{{ asset('furnitures/assets/img/others/choice2.png')}}" alt="">
+                            </div>
+                            <div class="choice_text">
+                                <h4><a href="#">For Out Door & Gardern</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single_choice wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.3s">
+                            <div class="choice_thumb">
+                                <!-- <img src="assets/img/others/choice3.png" alt=""> -->
+                                <img src="{{ asset('furnitures/assets/img/others/choice3.png')}}" alt="">
+                            </div>
+                            <div class="choice_text">
+                                <h4><a href="#">For Rest Place</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single_choice wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1.4s">
+                            <div class="choice_thumb">
+                                <!-- <img src="assets/img/others/choice2.png" alt=""> -->
+                                <img src="{{ asset('furnitures/assets/img/others/choice2.png')}}" alt="">
+                            </div>
+                            <div class="choice_text">
+                                <h4><a href="#">for Living room</a></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
 <div class="product_section mb-50">
         <div class="container">
             <div class="product_tab_button">

@@ -67,6 +67,8 @@
     <!-- product details css here -->
     <div class="product_details_section">
         <div class="container">
+            <form action="{{ route('front.add_cart')}}" method="post">
+            @csrf
             <div class="row">
                 <div class="col-lg-7">
                     <div class="product_details_left">
@@ -128,10 +130,14 @@
                         </div>
                         <div class="product_variant_quantity d-flex align-items-center">
                             <div class="pro-qty border">
-                                <input min="1" max="100" type="tex" value="1">
+                                <input min="1" max="100" type="tex" value="1" name="qty">
                             </div>
                             <button class="btn btn-link" type="submit">add to cart</button>  
                         </div>
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="price" value="{{ $product->price }}">
+                        <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
+        
                         <div class=" product_d_action">
                            <ul class="d-flex">
                                <li><a href="#" title="Add to wishlist"> <img src="assets/img/icon/heart.png" alt=""> Add to Wishlist <i class="ion-android-arrow-forward"></i></a></li>
@@ -141,6 +147,7 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
     <!-- product details css end -->

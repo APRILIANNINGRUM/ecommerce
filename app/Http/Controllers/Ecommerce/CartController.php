@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use DB;
 use App\Mail\CustomerRegisterMail;
 use Mail;
+use App\Cart;
 
 class CartController extends Controller
 {
@@ -41,13 +42,46 @@ class CartController extends Controller
         $cookie = cookie('dw-carts', json_encode($carts), 2880);
         return redirect()->back()->cookie($cookie);
     }
-        public function listCart()
-    {
-        $carts = json_decode(request()->cookie('dw-carts'), true);
-        $subtotal = collect($carts)->sum(function($q) {
-            return $q['qty'] * $q['product_price'];
-        });
-        return view('ecommerce.cart', compact('carts', 'subtotal'));
+    public function addCart(Request $request){
+       
+        //if (!auth()->guard('customer')->check()) {
+        $cart = Cart::where('customer_id', $request->customer_id)->where('product_id', $request->product_id)->first();
+        if($cart){
+            $cart->quantity = $cart->quantity + $request->qty;
+            $cart->total = $cart->total + ($request->price * $request->qty);
+            $cart->save();
+        }else{
+            $cart = new Cart;
+            $cart->customer_id = $request->customer_id;
+            $cart->product_id = $request->product_id;
+            $cart->price = $request->price;
+            $cart->quantity = $request->qty;
+            $cart->total = $request->price * $request->qty;
+            $cart->status = 0;
+            $cart->save();
+        }
+
+        return redirect()->back()->with('success', 'Berhasil menambahkan ke keranjang');
+        // return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan ke keranjang']);
+    }
+
+    public function showCart(){
+   
+        $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
+
+        if(!$carts){
+            return redirect()->back()->with('error', 'Keranjang belanja anda kosong');
+        }
+
+        $total = 0;
+        foreach($carts as $cart){
+            $total = $total + $cart->total;
+        }
+
+       
+        return view('ecommerce.cart', compact('carts', 'total'));
+
+
     }
     
     public function updateCart(Request $request)

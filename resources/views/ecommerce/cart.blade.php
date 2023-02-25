@@ -11,14 +11,12 @@
 			<div class="container">
 				<div class="banner_content text-center">
 					<h2>Keranjang Belanja</h2>
-					<div class="page_link">
-                        <a href="{{ url('/') }}">Home</a>
-                        <a href="{{ route('front.list_cart') }}">Cart</a>
-					</div>
+					
 				</div>
 			</div>
 		</div>
 	</section>
+	<br><br>
 	<!--================End Home Banner Area =================-->
 
 	<!--================Cart Area =================-->
@@ -32,63 +30,61 @@
                 <form action="{{ route('front.update_cart') }}" method="post">
                     @csrf
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
-                  
+                <div class="container">
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table" style="text-align: center;">
 						<thead>
 							<tr>
 								<th scope="col">Product</th>
+								<th scope="col">Name</th>
 								<th scope="col">Price</th>
 								<th scope="col">Quantity</th>
 								<th scope="col">Total</th>
 							</tr>
 						</thead>
+		
 						<tbody>
               <!-- LOOPING DATA DARI VARIABLE CARTS -->
-                            @forelse ($carts as $row)
-							<tr>
-								<td>
-									<div class="media">
-										<div class="d-flex">
-                                            <img src="{{ asset('storage/products/' . $row['product_image']) }}" width="100px" height="100px" alt="{{ $row['product_name'] }}">
-										</div>
-										<div class="media-body">
-                                            <p>{{ $row['product_name'] }}</p>
-										</div>
-									</div>
+                       @forelse($carts as $row)
+							<tr style="text-align: center;">
+								<td style="text-align: center;">
+									
+											<img src="{{ asset('storage/products/' . $row->product->image) }}" alt="" width="100" height="100">
+								
 								</td>
 								<td>
-                                    <h5>Rp {{ number_format($row['product_price']) }}</h5>
+									<span>{{ $row->product->name }}</span>
+								</td>
+								<td>
+                                   <span>Rp. {{ number_format($row->product->price) }}</span>
 								</td>
 								<td>
 									<div class="product_count">
-                    
-                    
-                    <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
-                                        <input type="text" name="qty[]" id="sst{{ $row['product_id'] }}" maxlength="12" value="{{ $row['qty'] }}" title="Quantity:" class="input-text qty">
-                                        <input type="hidden" name="product_id[]" value="{{ $row['product_id'] }}" class="form-control">
+									<input type="text" name="qty[]" id="sst{{ $row['product_id'] }}" maxlength="12" value="{{ $row['quantity'] }}" title="Quantity:" class="input-text qty">
+                                        <input type="hidden" name="product_id[]" value="{{ $row->product_id }}">
                     <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
                     
                     
-										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-										 class="increase items-count" type="button">
-											<i class="lnr lnr-chevron-up"></i>
-										</button>
 										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
 										 class="reduced items-count" type="button">
-											<i class="lnr lnr-chevron-down"></i>
+											<i class="fa fa-minus"></i>
 										</button>
+										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+										 class="increase items-count" type="button">
+											<i class="fa fa-plus"></i>
+										</button>
+										
 									</div>
 								</td>
 								<td>
-                                    <h5>Rp {{ number_format($row['product_price'] * $row['qty']) }}</h5>
+                                <span>Rp. {{ number_format($row->product->price * $row->quantity) }}</span>
 								</td>
                             </tr>
-                            @empty
+                          @empty
                             <tr>
                                 <td colspan="4">Tidak ada belanjaan</td>
                             </tr>
-                            @endforelse
+                          @endforelse
 							<tr class="bottom_button">
 								<td>
 									<button class="gray_btn">Update Cart</button>
@@ -107,9 +103,10 @@
 								</td>
 								<td>
 									<h5>Subtotal</h5>
+									<spam>Rp. {{ number_format($total) }}</spam>
 								</td>
 								<td>
-                                    <h5>Rp {{ number_format($subtotal) }}</h5>
+                                    
 								</td>
 							</tr>
 							{{-- <tr class="shipping_area">
@@ -164,6 +161,7 @@
 								</td>
 							</tr>
 						</tbody>
+						</center>
 					</table>
 				</div>
 			</div>
