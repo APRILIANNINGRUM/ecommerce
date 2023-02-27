@@ -11,7 +11,7 @@
                         <div class="main_menu d-none d-lg-block">
                             <nav>
                                 <ul class="d-flex">
-                                    <li><a class="active" href="index.html">Home</a>
+                                    <li><a class="active" href="{{ route ('front.index')}}" >Home</a>
                                         <ul class="sub_menu">
                                             <li><a href="index.html">Home 1</a></li>
                                             <li><a href="index-2.html">Home 2</a></li>
@@ -30,7 +30,7 @@
                                             <li><a href="shop-collection.html">shop collection</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="single-product.html">Product</a></li>
+                                    <li><a href="{{ route ('front.product')}}">Product</a></li>
                                     <li><a href="blog.html">blog</a>
                                         <ul class="sub_menu">
                                             <li><a href="blog.html">Blog Pages</a></li>
@@ -50,9 +50,8 @@
                                     <li class="header_search_btn"><a href="#"><img src="{{ asset('furnitures/assets/img/icon/search.png')}}" alt=""></a></li>
                                     <!-- <li class="shopping_cart"><a href="#"><img src="assets/img/icon/cart.png"
                                                 alt=""></a></li> -->
-                                    <li class="shopping_cart"><a href="#"><img src="{{ asset('furnitures/assets/img/icon/cart.png')}}" alt=""></a></li>
-                                    <li class="account_link_menu"><a href="#"><img src="assets/img/icon/person.png"
-                                                alt=""></a>
+                                    <li class="shopping_cart"><a href="{{route('front.cart')}}"><img src="{{ asset('furnitures/assets/img/icon/cart.png')}}" alt=""></a></li>
+                                    <li class="account_link_menu"><a href="#"><img src="assets/img/icon/person.png" alt=""></a>
                                         <ul class="dropdown_account_link">
                                             <li><a href="">About Us</a></li>
                                             <li><a href="">Contact Us</a></li>

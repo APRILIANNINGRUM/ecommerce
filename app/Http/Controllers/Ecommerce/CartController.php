@@ -67,19 +67,22 @@ class CartController extends Controller
 
     public function showCart(){
    
-        $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
-
-        if(!$carts){
-            return redirect()->back()->with('error', 'Keranjang belanja anda kosong');
+        if (!auth()->guard('customer')->check()) {
+            return redirect()->route('login');
         }
 
-        $total = 0;
-        foreach($carts as $cart){
-            $total = $total + $cart->total;
+        elseif(Cart::where('customer_id', auth()->guard('customer')->user()->id)->count() == 0){
+            return redirect()->route('home')->with('error', 'Keranjang anda masih kosong');
         }
-
-       
-        return view('ecommerce.cart', compact('carts', 'total'));
+        else{
+            $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
+            $total = 0;
+            foreach($carts as $cart){
+                $total = $total + $cart->total;
+            }
+            return view('ecommerce.cart', compact('carts', 'total'));
+        }
+      
 
 
     }
@@ -106,12 +109,22 @@ class CartController extends Controller
     }
     public function checkout()
     {
-        $provinces = Province::orderBy('created_at', 'DESC')->get();
-        $carts = $this->getCarts();
-        $subtotal = collect($carts)->sum(function($q) {
-            return $q['qty'] * $q['product_price'];
-        });
-        return view('ecommerce.checkout', compact('provinces', 'carts', 'subtotal'));
+        if (!auth()->guard('customer')->check()) {
+            return redirect()->route('login');
+        }
+        else
+        {
+            $provinces = Province::orderBy('created_at', 'DESC')->get();
+            $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
+            $subtotal = 0;
+            foreach($carts as $cart){
+                $subtotal = $subtotal + $cart->total;
+            }
+    
+            $user = Customer::where('id', auth()->guard('customer')->user()->id)->first();
+
+            return view('ecommerce.checkout', compact('provinces','subtotal', 'user'));
+        }
     }
     public function getCity(Request $request)
     {

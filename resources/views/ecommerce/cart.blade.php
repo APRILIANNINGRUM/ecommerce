@@ -87,7 +87,7 @@
                           @endforelse
 							<tr class="bottom_button">
 								<td>
-									<button class="gray_btn">Update Cart</button>
+									<button class="btn btn-primary btn-block">Update Cart</button>
 								</td>
 								<td></td>
 								<td></td>
@@ -155,8 +155,9 @@
 								<td></td>
 								<td>
 									<div class="checkout_btn_inner">
-									<a class="gray_btn" href="{{ route('front.product') }}">Continue Shopping</a>
-									<a class="main_btn" href="{{ route('front.checkout') }}">Proceed to checkout</a>
+									<a class="btn btn-primary btn-block" href="{{ route('front.product') }}">Continue Shopping</a>
+									<a class="btn btn-primary btn-block" href="{{ route('front.checkout') }}">Checkout
+									</a>
 									</div>
 								</td>
 							</tr>
