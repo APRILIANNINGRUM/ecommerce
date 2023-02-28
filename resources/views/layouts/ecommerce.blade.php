@@ -24,7 +24,7 @@
     <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-192x192.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-180x180.png" />
     <meta name="msapplication-TileImage" content="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-270x270.png" />
-
+    @yield('css')
           <!-- CSS 
     ========================= -->
     <!-- <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -60,14 +60,7 @@
     <script src="{{ asset('furnitures/assets/js/vendor/modernizr-3.7.1.min.js')}}"></script>
 
     <!-- Structured Data  -->
-    <script type="application/ld+json">
-        {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "name": "Replace_with_your_site_title",
-        "url": "Replace_with_your_site_URL"
-        }
-    </script>
+
 	
 </head>
 
@@ -253,22 +246,10 @@
 
 
     <!-- Js 
+    
     ========================= -->
-    <!-- <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="assets/js/vendor/popper.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/jquery.scrollup.min.js"></script>
-    <script src="assets/js/images-loaded.min.js"></script>
-    <script src="assets/js/jquery.nice-select.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/mailchimp-ajax.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/jquery-waypoints.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/ajax-mail.js"></script> -->
+    
+
     <script src="{{ asset('furnitures/js/vendor/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('furnitures/js/vendor/popper.js') }}"></script>
     <script src="{{ asset('furnitures/js/vendor/bootstrap.min.js') }}"></script>
@@ -290,7 +271,8 @@
     
     <!-- <script src="assets/js/main.js"></script> -->
     <script src="{{ asset('furnitures/js/main.js') }}"></script>
-    @yield('js')
+
+    
 </body>
 
 </html>

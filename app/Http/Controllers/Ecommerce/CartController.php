@@ -109,11 +109,8 @@ class CartController extends Controller
     }
     public function checkout()
     {
-        if (!auth()->guard('customer')->check()) {
-            return redirect()->route('login');
-        }
-        else
-        {
+        
+      
             $provinces = Province::orderBy('created_at', 'DESC')->get();
             $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
             $subtotal = 0;
@@ -124,12 +121,14 @@ class CartController extends Controller
             $user = Customer::where('id', auth()->guard('customer')->user()->id)->first();
 
             return view('ecommerce.checkout', compact('provinces','subtotal', 'user'));
-        }
+        
     }
     public function getCity(Request $request)
     {
+        //get parameter province_id
         $cities = City::where('province_id', request()->province_id)->get();
         return response()->json(['status' => 'success', 'data' => $cities]);
+        
     }
 
     public function getDistrict(Request $request)

@@ -65,6 +65,25 @@
                                 <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
                             </select>
+                            <script>
+                                //KETIKA SELECT BOX DENGAN ID province_id DIPILIH
+                                $('#province_id').on('change', function(){
+                                    //MAKA AKAN MELAKUKAN REQUEST KE URL /API/CITY
+                                    //DENGAN MENGIRIMKAN DATA PROVINCE_ID
+                                    $.ajax({
+                                        url: '/city/'+$(this).val(),
+                                        type: 'GET',
+                                        dataType: 'JSON',
+                                        success: function(html){
+                                            //KEMUDIAN DATA YANG DITERIMA AKAN DITAMPILKAN PADA SELECT BOX DENGAN ID city_id
+                                            $('#city_id').empty();
+                                            $.each(html.data, function(key, item){
+                                                $('#city_id').append('<option value="'+item.id+'">'+item.name+'</option>');
+                                            });
+                                        }
+                                    });
+                                });
+                            </script>
                             <p class="text-danger">{{ $errors->first('province_id') }}</p>
                         </div>
                         <br><br><br>

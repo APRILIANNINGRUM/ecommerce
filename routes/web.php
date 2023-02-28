@@ -23,6 +23,7 @@ Route::post('/checkout', 'App\Http\Controllers\Ecommerce\CartController@processC
 Route::get('/checkout/{invoice}', 'App\Http\Controllers\Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
 Route::get('/signup','App\Http\Controllers\Ecommerce\RegisterController@index')->name('signup');
 Route::post('/signup','App\Http\Controllers\Ecommerce\RegisterController@store')->name('signup');
+Route::get('/city/{province_id}', 'App\Http\Controllers\Ecommerce\CartController@getCity'); //ROUTE API UNTUK /CITY
 
 Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
     Route::get('login', '\App\Http\Controllers\Ecommerce\LoginController@loginForm')->name('customer.login'); 
