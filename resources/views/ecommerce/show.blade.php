@@ -136,7 +136,7 @@
                         </div>
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="price" value="{{ $product->price }}">
-                        <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
+                    
         
                         <div class=" product_d_action">
                            <ul class="d-flex">

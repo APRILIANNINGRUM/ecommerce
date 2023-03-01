@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Hutche - Furniture ECommerce Bootstrap 5 Template </title>
+    @yield('title')
     <meta name="description" content="Hutche Furniture eCommerce Template is a wonderful and elegant-looking website template that is the best choice for any type of online furniture store."/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
@@ -60,6 +60,7 @@
     <script src="{{ asset('furnitures/assets/js/vendor/modernizr-3.7.1.min.js')}}"></script>
 
     <!-- Structured Data  -->
+    @yield('js')
 
 	
 </head>
@@ -242,6 +243,7 @@
             </div>
         </div>
     </footer>
+    @yield('scripts')
     <!-- footer section end -->
 
 
@@ -250,27 +252,29 @@
     ========================= -->
     
 
-    <script src="{{ asset('furnitures/js/vendor/jquery-3.4.1.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/vendor/popper.js') }}"></script>
-    <script src="{{ asset('furnitures/js/vendor/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/slick.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/wow.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/jquery.scrollup.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/images-loaded.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/jquery.nice-select.js') }}"></script>
-    <script src="{{ asset('furnitures/js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/mailchimp-ajax.js') }}"></script>
-    <script src="{{ asset('furnitures/js/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/jquery-waypoints.js') }}"></script>
-    <script src="{{ asset('furnitures/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('furnitures/js/ajax-mail.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/vendor/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/vendor/popper.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/jquery.scrollup.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/images-loaded.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/jquery.nice-select.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/mailchimp-ajax.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/jquery-waypoints.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('furnitures/assets/js/ajax-mail.js') }}"></script>
 
 
     <!-- Main JS -->
     
     <!-- <script src="assets/js/main.js"></script> -->
-    <script src="{{ asset('furnitures/js/main.js') }}"></script>
+    @yield('js')
+    <script src="{{ asset('furnitures/assets/js/main.js') }}"></script>
+   
 
     
 </body>

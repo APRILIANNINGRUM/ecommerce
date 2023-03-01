@@ -43,16 +43,16 @@ class CartController extends Controller
         return redirect()->back()->cookie($cookie);
     }
     public function addCart(Request $request){
-       
-        //if (!auth()->guard('customer')->check()) {
-        $cart = Cart::where('customer_id', $request->customer_id)->where('product_id', $request->product_id)->first();
+        $user = auth()->guard('customer')->user();
+        $cart = Cart::where('customer_id', $user->id)->where('product_id', $request->product_id)->first();
+
         if($cart){
             $cart->quantity = $cart->quantity + $request->qty;
             $cart->total = $cart->total + ($request->price * $request->qty);
             $cart->save();
         }else{
             $cart = new Cart;
-            $cart->customer_id = $request->customer_id;
+            $cart->customer_id = $user->id;
             $cart->product_id = $request->product_id;
             $cart->price = $request->price;
             $cart->quantity = $request->qty;
