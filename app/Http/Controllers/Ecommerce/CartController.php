@@ -44,6 +44,9 @@ class CartController extends Controller
     }
     public function addCart(Request $request){
         $user = auth()->guard('customer')->user();
+        if (!$user) {
+            return redirect()->route('customer.login');
+        }
         $cart = Cart::where('customer_id', $user->id)->where('product_id', $request->product_id)->first();
 
         //if user not found
@@ -73,7 +76,7 @@ class CartController extends Controller
     public function showCart(){
    
         if (!auth()->guard('customer')->check()) {
-            return redirect()->route('login');
+            return redirect()->route('customer.login');
         }
 
 
@@ -91,8 +94,6 @@ class CartController extends Controller
 
         return view('ecommerce.cart', compact('carts', 'subtotal', 'total'));
       
-
-
     }
     
     public function updateCart(Request $request)
@@ -126,16 +127,14 @@ class CartController extends Controller
                 $subtotal = $subtotal + $cart->total;
             }
 
-            //total product with quantity
-            $total = 0;
+            $totalproduct = 0;
             foreach($carts as $cart){
-                $total = $total + $cart->quantity;
+                $totalproduct = $totalproduct + $cart->quantity;
             }
-
     
             $user = Customer::where('id', auth()->guard('customer')->user()->id)->first();
 
-            return view('ecommerce.checkout', compact('provinces','subtotal', 'user'));
+            return view('ecommerce.checkout', compact('provinces','subtotal', 'user', 'totalproduct'));
         
     }
     public function getCity(Request $request)
@@ -171,10 +170,11 @@ class CartController extends Controller
                 return redirect()->back()->with(['error' => 'Silahkan Login Terlebih Dahulu']);
             }
 
-            $carts = $this->getCarts();
-            $subtotal = collect($carts)->sum(function($q) {
-                return $q['qty'] * $q['product_price'];
-            });
+            $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
+            $subtotal = 0;
+            foreach($carts as $cart){
+                $subtotal = $subtotal + $cart->total;
+            }
 
             if (!auth()->guard('customer')->check()) {
                 $password = Str::random(8);
@@ -201,13 +201,13 @@ class CartController extends Controller
             ]);
 
             foreach ($carts as $row) {
-                $product = Product::find($row['product_id']);
+                $product = Product::where('id', $row->product_id)->first();
                 OrderDetail::create([
                     'order_id' => $order->id,
-                    'product_id' => $row['product_id'],
-                    'price' => $row['product_price'],
-                    'qty' => $row['qty'],
-                    'weight' => $product->weight
+                    'product_id' => $row->product_id,
+                    'price' => $row->price,
+                    'qty' => $row->quantity,
+                    'weight' => $product->weight,
                 ]);
             }
             
@@ -226,6 +226,7 @@ class CartController extends Controller
     }
     public function checkoutFinish($invoice)
     {
+        Cart::where('customer_id', auth()->guard('customer')->user()->id)->delete();
         $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
         //after that delete all cart
         Cart::where('customer_id', auth()->guard('customer')->user()->id)->delete();

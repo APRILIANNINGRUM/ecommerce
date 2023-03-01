@@ -40,19 +40,20 @@
                         <br><br><br>
                         <div class="col-md-6 form-group p_star">
                             <label for="">No Telp</label>
-                            <input type="text" class="form-control" id="number" name="customer_phone" required>
+                            <input type="text" class="form-control" id="number" name="customer_phone" value="{{ $user->phone_number }}" required>
+
                             <p class="text-danger">{{ $errors->first('customer_phone') }}</p>
                         </div>
                         <br><br><br>
                         <div class="col-md-6 form-group p_star">
                             <label for="">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email}}" required>
                             <p class="text-danger">{{ $errors->first('email') }}</p>
                         </div>
                         <br><br><br>
                         <div class="col-md-12 form-group p_star">
                             <label for="">Alamat Lengkap</label>
-                            <input type="text" class="form-control" id="add1" name="customer_address" required>
+                            <input type="text" class="form-control" id="add1" name="customer_address" value="{{ $user->address }}" required>
                             <p class="text-danger">{{ $errors->first('customer_address') }}</p>
                         </div>
                         <br><br><br>
@@ -105,7 +106,7 @@
 							<ul class="list" style="margin-bottom: 8px">
 								<li>
 									<a href="#">Product
-										<span>Total</span>
+										<span>Total : {{ $totalproduct }}</span>
 									</a>
                                 </li>
                             </ul>
@@ -113,8 +114,8 @@
 							<ul class="list list_2">
 								<li style="margin-bottom: 8px">
 									<a>Subtotal
-                                    <span>Rp.</span>
-									</a>
+                                    <span>Rp. {{ $subtotal}} </span>
+									</a> 
 								</li>
 								<li style="margin-bottom: 8px">
 									<a href="#">Pengiriman

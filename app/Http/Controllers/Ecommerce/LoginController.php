@@ -44,13 +44,9 @@ class LoginController extends Controller
 
         return view('ecommerce.dashboard', compact('orders'));
     }
-
-    //logout
     public function logout()
     {
-        //LOGOUT DENGAN GUARD CUSTOMER
         auth()->guard('customer')->logout();
-        //REDIRECT KE HALAMAN LOGIN
         return redirect(route('customer.login'));
     }
 }
