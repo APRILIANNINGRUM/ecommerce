@@ -27,7 +27,8 @@
 			<h3 class="title_confirmation">Terima kasih, pesanan anda telah kami terima.</h3>
 			<div class="row order_d_inner">
 				<div class="col-lg-6">
-					<div class="details_item">
+					<!-- <div class="details_item"> with center -->
+					<div class="details_item" style="text-align: center">
 						<h4>Informasi Pesanan</h4>
 						<ul class="list">
 							<li>
@@ -64,6 +65,7 @@
 						</ul>
 					</div>
 				</div>
+				<a href="{{ url('/') }}" class="btn subs_btn form-control">Kembali ke Beranda</a>
 			</div>
 		</div>
 	</section>

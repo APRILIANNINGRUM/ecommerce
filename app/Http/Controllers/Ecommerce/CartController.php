@@ -46,6 +46,11 @@ class CartController extends Controller
         $user = auth()->guard('customer')->user();
         $cart = Cart::where('customer_id', $user->id)->where('product_id', $request->product_id)->first();
 
+        //if user not found
+        if(!$user){
+            return redirect()->route('login');
+        }
+
         if($cart){
             $cart->quantity = $cart->quantity + $request->qty;
             $cart->total = $cart->total + ($request->price * $request->qty);
@@ -71,17 +76,20 @@ class CartController extends Controller
             return redirect()->route('login');
         }
 
-        elseif(Cart::where('customer_id', auth()->guard('customer')->user()->id)->count() == 0){
-            return redirect()->route('home')->with('error', 'Keranjang anda masih kosong');
+
+        $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
+        $subtotal = 0;
+        foreach($carts as $cart){
+            $subtotal = $subtotal + $cart->total;
         }
-        else{
-            $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
-            $total = 0;
-            foreach($carts as $cart){
-                $total = $total + $cart->total;
-            }
-            return view('ecommerce.cart', compact('carts', 'total'));
+
+  
+        $total = 0;
+        foreach($carts as $cart){
+            $total = $total + $cart->quantity;
         }
+
+        return view('ecommerce.cart', compact('carts', 'subtotal', 'total'));
       
 
 
@@ -110,13 +118,20 @@ class CartController extends Controller
     public function checkout()
     {
         
-      
+            
             $provinces = Province::orderBy('created_at', 'DESC')->get();
             $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
             $subtotal = 0;
             foreach($carts as $cart){
                 $subtotal = $subtotal + $cart->total;
             }
+
+            //total product with quantity
+            $total = 0;
+            foreach($carts as $cart){
+                $total = $total + $cart->quantity;
+            }
+
     
             $user = Customer::where('id', auth()->guard('customer')->user()->id)->first();
 
@@ -212,6 +227,8 @@ class CartController extends Controller
     public function checkoutFinish($invoice)
     {
         $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
+        //after that delete all cart
+        Cart::where('customer_id', auth()->guard('customer')->user()->id)->delete();
         return view('ecommerce.checkout_finish', compact('order'));
     }
 }
