@@ -44,6 +44,9 @@ class CartController extends Controller
     }
     public function addCart(Request $request){
         $user = auth()->guard('customer')->user();
+        if (!$user) {
+            return redirect()->route('customer.login');
+        }
         $cart = Cart::where('customer_id', $user->id)->where('product_id', $request->product_id)->first();
 
         if($cart){
@@ -68,23 +71,24 @@ class CartController extends Controller
     public function showCart(){
    
         if (!auth()->guard('customer')->check()) {
-            return redirect()->route('login');
+            return redirect()->route('customer.login');
         }
 
-        elseif(Cart::where('customer_id', auth()->guard('customer')->user()->id)->count() == 0){
-            return redirect()->route('home')->with('error', 'Keranjang anda masih kosong');
+
+        $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
+        $subtotal = 0;
+        foreach($carts as $cart){
+            $subtotal = $subtotal + $cart->total;
         }
-        else{
-            $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
-            $total = 0;
-            foreach($carts as $cart){
-                $total = $total + $cart->total;
-            }
-            return view('ecommerce.cart', compact('carts', 'total'));
+
+  
+        $total = 0;
+        foreach($carts as $cart){
+            $total = $total + $cart->quantity;
         }
+
+        return view('ecommerce.cart', compact('carts', 'subtotal', 'total'));
       
-
-
     }
     
     public function updateCart(Request $request)
@@ -117,10 +121,15 @@ class CartController extends Controller
             foreach($carts as $cart){
                 $subtotal = $subtotal + $cart->total;
             }
+
+            $totalproduct = 0;
+            foreach($carts as $cart){
+                $totalproduct = $totalproduct + $cart->quantity;
+            }
     
             $user = Customer::where('id', auth()->guard('customer')->user()->id)->first();
 
-            return view('ecommerce.checkout', compact('provinces','subtotal', 'user'));
+            return view('ecommerce.checkout', compact('provinces','subtotal', 'user', 'totalproduct'));
         
     }
     public function getCity(Request $request)
@@ -156,10 +165,11 @@ class CartController extends Controller
                 return redirect()->back()->with(['error' => 'Silahkan Login Terlebih Dahulu']);
             }
 
-            $carts = $this->getCarts();
-            $subtotal = collect($carts)->sum(function($q) {
-                return $q['qty'] * $q['product_price'];
-            });
+            $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
+            $subtotal = 0;
+            foreach($carts as $cart){
+                $subtotal = $subtotal + $cart->total;
+            }
 
             if (!auth()->guard('customer')->check()) {
                 $password = Str::random(8);
@@ -186,13 +196,13 @@ class CartController extends Controller
             ]);
 
             foreach ($carts as $row) {
-                $product = Product::find($row['product_id']);
+                $product = Product::where('id', $row->product_id)->first();
                 OrderDetail::create([
                     'order_id' => $order->id,
-                    'product_id' => $row['product_id'],
-                    'price' => $row['product_price'],
-                    'qty' => $row['qty'],
-                    'weight' => $product->weight
+                    'product_id' => $row->product_id,
+                    'price' => $row->price,
+                    'qty' => $row->quantity,
+                    'weight' => $product->weight,
                 ]);
             }
             
@@ -211,6 +221,7 @@ class CartController extends Controller
     }
     public function checkoutFinish($invoice)
     {
+        Cart::where('customer_id', auth()->guard('customer')->user()->id)->delete();
         $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
         return view('ecommerce.checkout_finish', compact('order'));
     }

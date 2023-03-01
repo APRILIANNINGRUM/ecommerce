@@ -44,4 +44,9 @@ class LoginController extends Controller
 
         return view('ecommerce.dashboard', compact('orders'));
     }
+    public function logout()
+    {
+        auth()->guard('customer')->logout();
+        return redirect(route('customer.login'));
+    }
 }
