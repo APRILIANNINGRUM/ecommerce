@@ -60,7 +60,7 @@
                                     <li class="user">
                                         
                                         @if (Auth::guard('customer')->check())
-                                        <span><a href="#">Hi, {{ Auth::guard('customer')->user()->name }}</a></span>&nbsp;|&nbsp;
+                                        <span><a href="{{ route('customer.dashboard')}}"><i class="fa fa-user"></i> {{ Auth::guard('customer')->user()->name }}</a></span>&nbsp;|&nbsp;
                                         <span><a href="{{ route('customer.logout')}}"><i class="fa fa-sign-out"></i> Logout</a></span>
                                         @else
                                         <span><a href="{{ route('customer.post_login')}}"><i class="fa fa-user"></i> Login</a></span>&nbsp;|&nbsp;

@@ -17,7 +17,7 @@ Route::get('/product', 'App\Http\Controllers\Ecommerce\FrontController@product')
 Route::post('cart', 'App\Http\Controllers\Ecommerce\CartController@addToCart')->name('front.cart');
 Route::post('cart/add', 'App\Http\Controllers\Ecommerce\CartController@addCart')->name('front.add_cart');
 Route::get('/cart', 'App\Http\Controllers\Ecommerce\CartController@showCart')->name('front.cart');
-Route::post('/cart/update', 'App\Http\Controllers\Ecommerce\CartController@updateCart')->name('front.update_cart');
+Route::post('/cart/update/{id}', 'App\Http\Controllers\Ecommerce\CartController@updateCart')->name('front.update_cart');
 Route::get('/checkout', 'App\Http\Controllers\Ecommerce\CartController@checkout')->name('front.checkout');
 Route::post('/checkout', 'App\Http\Controllers\Ecommerce\CartController@processCheckout')->name('front.store_checkout');
 Route::get('/checkout/{invoice}', 'App\Http\Controllers\Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');

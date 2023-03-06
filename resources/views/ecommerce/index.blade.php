@@ -144,11 +144,10 @@
                                 <article class="single_product">
                                     <figure>
                                         <div class="product_thumb">
-                                            <a href="{{ url('/product/' . $row->slug) }}"><img src="{{ asset('storage/products/' . $row->image) }}" alt="{{ $row->name }}"></a>
+                                            <a href="{{ url('/product/' . $row->slug) }}"><img src="{{ asset('storage/products/' . $row->image) }}" style="width:100%; height:300px;" alt="{{ $row->name }}"></a>
                                         </div>
                                         <figcaption class="product_content">
-                                            <h4><a href="{{ url('/product/' . $row->slug) }}">
-                                            {{ $row->name }}</a></h4>
+                                            <h4><a href="{{ url('/product/' . $row->slug) }}"> {{ $row->name }}</a></h4>
                                             <div class="price_box">
                                                 <span class="old_price">Rp {{ number_format($row->price) }}</span>
                                             </div>
