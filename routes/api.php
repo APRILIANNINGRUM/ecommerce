@@ -14,9 +14,11 @@ use App\Http\Controllers\Ecommerce\CartController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('city', 'App\Http\Controllers\Ecommerce\CartController@getCity'); //ROUTE API UNTUK /CITY
-Route::post('/cart/{id}', 'App\Http\Controllers\Ecommerce\CartController@updateCart')->name('front.update_cart');
-Route::get('district', 'App\Http\Controllers\Ecommerce\CartController@getDistrict'); //ROUTE API UNTUK /DISTRICT
+Route::get('city', 'App\Http\Controllers\Ecommerce\CartController@getCity'); 
+Route::post('/cart/{id}', [CartController::class, 'updateCart']);
+Route::get('district', 'App\Http\Controllers\Ecommerce\CartController@getDistrict'); 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+?>

@@ -28,7 +28,7 @@
         <!-- KARENA MODULENYA AKAN DIKERJAKAN PADA SUB BAB SELANJUTNYA -->
         <!-- HANYA SAJA DEMI KEMUDAHAN PENULISAN MAKA SAYA MASUKKAN PADA BAGIAN INI -->
                
-                    
+                @csrf
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
                 <div class="container">
 				<div class="table-responsive">
@@ -70,7 +70,7 @@
 										<button class="increase items-count" type="button" id="qtyplus{{ $row->id }}">
 											<i class="fa fa-plus"></i>
 										</button>
-										<p>{{$row->id}}</p>
+									
 										<input type="hidden" name="id{{ $row->id }}" value="{{ $row->id }}">
 										
 									</div>
@@ -102,7 +102,7 @@
 								</td>
 								<td>
 									<h5>Subtotal</h5>
-									<spam>Rp. {{ number_format($total) }}</spam>
+									<spam>Rp. {{ number_format($subtotal) }}</spam>
 								</td>
 								<td>
                                     
@@ -174,44 +174,92 @@
 
 		@foreach($carts as $row)
 		$('#qtyminus{{ $row->id }}').click(function(e){
-			e.preventDefault();
-			var qty = $('#qty{{ $row->id }}');
-			var currentVal = parseInt(qty.val());
-			if (!isNaN(currentVal) && currentVal > 1) {
-				qty.val(currentVal - 1);
+
+			var qty = $('#qty{{ $row->id }}').val();
+			if(qty > 1){
+				$('#qty{{ $row->id }}').val(parseInt(qty) - 1);
 			}
+
+			var qty = $('#qty{{ $row->id }}').val();
+			var id = $('#id{{ $row->id }}').val();
+			$.ajax({
+				url: '/api/cart/{{ $row->id }}',
+				type: 'POST',
+				data: {
+				
+					qty: qty,
+				 
+				},
+				dataType: 'json',
+				success: function (data) {
+					if (data.status == 'success') {
+				
+						//refresh page
+						location.reload();
+					} else {
+						location.reload();
+					}
+				}
+			});
+
 		});
 		$('#qtyplus{{ $row->id }}').click(function(e){
-			e.preventDefault();
-			var qty = $('#qty{{ $row->id }}');
-			var currentVal = parseInt(qty.val());
-			if (!isNaN(currentVal)) {
-				qty.val(currentVal + 1);
-			}
+
+			var qty = $('#qty{{ $row->id }}').val();
+			$('#qty{{ $row->id }}').val(parseInt(qty) + 1);
+
+			var qty = $('#qty{{ $row->id }}').val();
+			var id = $('#id{{ $row->id }}').val();
+			$.ajax({
+				url: '/api/cart/{{ $row->id }}',
+				type: 'POST',
+				data: {
+				
+					qty: qty,
+				 
+				},
+				dataType: 'json',
+				success: function (data) {
+					if (data.status == 'success') {
+				
+						//refresh page
+						
+					} else {
+						location.reload();
+					}
+				}
+			});
 		});
 	
 		@endforeach
 	</script>
-	<script>
-		$(document).ready(function () {
-        @foreach ($carts as $item)
-           //updayte with route /cart/update/{id}
-			$('#qty{{ $item->id }}').change(function () {
-				var qty = $(this).val();
-				var id = $(this).next().val();
-				$.ajax({
-					url: '/cart/update/' + id,
-					type: 'POST',
-					data: {
-						_token: '{{ csrf_token() }}',
-						qty: qty
-					},
-					success: function (response) {
-						window.location.href = '/cart';
+<script>
+
+$(document).ready(function () {
+	@foreach ($carts as $item)
+		$('#qty{{ $item->id }}').on('change', function () {
+			var qty = $(this).val();
+			var id = $('#id{{ $item->id }}').val();
+			$.ajax({
+				url: '/api/cart/{{ $item->id }}',
+				type: 'POST',
+				data: {
+				
+					qty: qty,
+				 
+				},
+				dataType: 'json',
+				success: function (data) {
+					if (data.status == 'success') {
+				
+						console.log(data.data);
+					} else {
+						console.log(data.data);
 					}
-				});
+				}
 			});
-        @endforeach
-    });
-	</script>
+		});
+	@endforeach
+});
+</script>
 @endsection

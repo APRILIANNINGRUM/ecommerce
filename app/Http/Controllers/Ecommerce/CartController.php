@@ -221,15 +221,15 @@ class CartController extends Controller
     //parameternya diisi atuh
     public function updateCart(Request $request ,$id){
         //silakan diisi sendiri
-        if ($request->qty)
-        {
-            $cart = Cart::find($id);
-            $cart->quantity = $request->qty;
-            $cart->total = $cart->price * $request->qty;
-            $cart->save();
-        }
-        return redirect()->back()->with('success', 'Berhasil mengubah keranjang');
-        
+
+        //token csrf
+        $cart = Cart::find($id);
+        $cart->quantity = $request->qty;
+        $cart->total = $request->qty * $cart->price;
+        $cart->save();
+
+        //return redirect to cart page
+        return redirect()->route('front.cart');
 
     }
 }
