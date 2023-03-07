@@ -27,8 +27,8 @@
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
         <!-- KARENA MODULENYA AKAN DIKERJAKAN PADA SUB BAB SELANJUTNYA -->
         <!-- HANYA SAJA DEMI KEMUDAHAN PENULISAN MAKA SAYA MASUKKAN PADA BAGIAN INI -->
-                <form action="{{ route('front.update_cart') }}" method="post">
-                    @csrf
+               
+                    
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
                 <div class="container">
 				<div class="table-responsive">
@@ -60,19 +60,18 @@
 								</td>
 								<td>
 									<div class="product_count">
-									<input type="text" name="qty[]" id="sst{{ $row['product_id'] }}" maxlength="12" value="{{ $row['quantity'] }}" title="Quantity:" class="input-text qty">
-                                        <input type="hidden" name="product_id[]" value="{{ $row->product_id }}">
-                    <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
+									<input type="text" id="qty{{ $row->id }}" maxlength="12" value="{{ $row->quantity }}" title="Quantity:" class="input-text qty">
+                                        <input type="hidden" name="product_id" value="{{ $row->product_id }}">
+                
                     
-                    
-										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-										 class="reduced items-count" type="button">
+										<button class="reduced items-count" type="button" id="qtyminus{{ $row->id }}">
 											<i class="fa fa-minus"></i>
 										</button>
-										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-										 class="increase items-count" type="button">
+										<button class="increase items-count" type="button" id="qtyplus{{ $row->id }}">
 											<i class="fa fa-plus"></i>
 										</button>
+										<p>{{$row->id}}</p>
+										<input type="hidden" name="id{{ $row->id }}" value="{{ $row->id }}">
 										
 									</div>
 								</td>
@@ -93,7 +92,7 @@
 								<td></td>
 								<td></td>
                             </tr>
-                            </form>
+                            
 							<tr>
 								<td>
 
@@ -169,4 +168,50 @@
 		</div>
 	</section>
 	<!--================End Cart Area =================-->
+@endsection
+@section('js')
+	<script>
+
+		@foreach($carts as $row)
+		$('#qtyminus{{ $row->id }}').click(function(e){
+			e.preventDefault();
+			var qty = $('#qty{{ $row->id }}');
+			var currentVal = parseInt(qty.val());
+			if (!isNaN(currentVal) && currentVal > 1) {
+				qty.val(currentVal - 1);
+			}
+		});
+		$('#qtyplus{{ $row->id }}').click(function(e){
+			e.preventDefault();
+			var qty = $('#qty{{ $row->id }}');
+			var currentVal = parseInt(qty.val());
+			if (!isNaN(currentVal)) {
+				qty.val(currentVal + 1);
+			}
+		});
+	
+		@endforeach
+	</script>
+	<script>
+		$(document).ready(function () {
+        @foreach ($carts as $item)
+           //updayte with route /cart/update/{id}
+			$('#qty{{ $item->id }}').change(function () {
+				var qty = $(this).val();
+				var id = $(this).next().val();
+				$.ajax({
+					url: '/cart/update/' + id,
+					type: 'POST',
+					data: {
+						_token: '{{ csrf_token() }}',
+						qty: qty
+					},
+					success: function (response) {
+						window.location.href = '/cart';
+					}
+				});
+			});
+        @endforeach
+    });
+	</script>
 @endsection

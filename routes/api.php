@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Ecommerce\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('city', 'App\Http\Controllers\Ecommerce\CartController@getCity'); //ROUTE API UNTUK /CITY
+Route::post('/cart/{id}', 'App\Http\Controllers\Ecommerce\CartController@updateCart')->name('front.update_cart');
 Route::get('district', 'App\Http\Controllers\Ecommerce\CartController@getDistrict'); //ROUTE API UNTUK /DISTRICT
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

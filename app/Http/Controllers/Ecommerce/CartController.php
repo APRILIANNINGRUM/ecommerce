@@ -95,20 +95,7 @@ class CartController extends Controller
         return view('ecommerce.cart', compact('carts', 'subtotal', 'total'));
       
     }
-    
-    public function updateCart(Request $request)
-    {
-        $carts = json_decode(request()->cookie('dw-carts'), true);
-        foreach ($request->product_id as $key => $row) {
-            if ($request->qty[$key] == 0) {
-                unset($carts[$row]);
-            } else {
-                $carts[$row]['qty'] = $request->qty[$key];
-            }
-        }
-        $cookie = cookie('dw-carts', json_encode($carts), 2880);
-        return redirect()->back()->cookie($cookie);
-    }
+
     
         private function getCarts()
     {
@@ -117,9 +104,7 @@ class CartController extends Controller
         return $carts;
     }
     public function checkout()
-    {
-        
-            
+    { 
             $provinces = Province::orderBy('created_at', 'DESC')->get();
             $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
             $subtotal = 0;
@@ -231,5 +216,20 @@ class CartController extends Controller
         //after that delete all cart
         Cart::where('customer_id', auth()->guard('customer')->user()->id)->delete();
         return view('ecommerce.checkout_finish', compact('order'));
+    }
+    //kalo ngupdate pake Request $request di parameter
+    //parameternya diisi atuh
+    public function updateCart(Request $request ,$id){
+        //silakan diisi sendiri
+        if ($request->qty)
+        {
+            $cart = Cart::find($id);
+            $cart->quantity = $request->qty;
+            $cart->total = $cart->price * $request->qty;
+            $cart->save();
+        }
+        return redirect()->back()->with('success', 'Berhasil mengubah keranjang');
+        
+
     }
 }
