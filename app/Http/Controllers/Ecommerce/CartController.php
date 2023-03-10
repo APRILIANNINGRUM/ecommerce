@@ -232,4 +232,19 @@ class CartController extends Controller
         return redirect()->route('front.cart');
 
     }
+    public function totalCart(){
+
+        $cart = Cart::where('customer_id', auth()->guard('customer')->user()->id)->count();
+        return response()->json($cart);
+    }
+    public function deleteCart($id){
+        //silakan diisi sendiri
+
+        //token csrf
+        $cart = Cart::find($id);
+        $cart->delete();
+
+        //return redirect to cart page
+        return redirect()->route('front.cart');
+    }
 }

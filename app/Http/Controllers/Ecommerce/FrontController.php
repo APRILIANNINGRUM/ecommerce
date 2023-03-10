@@ -55,4 +55,8 @@ class FrontController extends Controller
         //DENGAN MENGIRIMKAN FLASH SESSION ERROR
         return redirect(route('customer.login'))->with(['error' => 'Invalid Verifikasi Token']);
     }
+
+    public function about(){
+        return view('ecommerce.about');
+    }
 }

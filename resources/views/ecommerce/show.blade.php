@@ -33,22 +33,7 @@
                                 <a href="#"><img src="{{ asset('storage/products/' . $product->image) }}" alt=""></a>
                             </div>
                         </div>
-                        <div class="product_gallery_list">
-                            <div class="product_gallery_thumb">
-                                <a href="#"><img src="{{ asset('storage/products/' . $product->image) }}" alt=""></a>
-                            </div>
-                            <div class="product_gallery_thumb">
-                                <a href="#"><img src="{{ asset('storage/products/' . $product->image) }}" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="product_gallery_list">
-                            <div class="product_gallery_thumb">
-                                <a href="#"><img src="{{ asset('storage/products/' . $product->image) }}" alt=""></a>
-                            </div>
-                            <div class="product_gallery_thumb">
-                                <a href="#"><img src="{{ asset('storage/products/' . $product->image) }}" alt=""></a>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="product_social">
                         <ul class="d-flex justify-content-center">

@@ -124,13 +124,13 @@
                                         <article class="single_product">
                                             <figure>
                                                 <div class="product_thumb">
-                                                    <a href="single-product.html"><img src="{{ asset('storage/products/' . $row->image) }} " alt="{{ $row->image }}" height="500px" width="500px"></a>
+                                                    <a href="{{ url('/product/' . $row->slug) }}"><img src="{{ asset('storage/products/' . $row->image) }} " alt="{{ $row->image }}" height="500px" width="500px"></a>
                                                     <div class="label_product">
                                                         <span class="label_sale">Sale</span>
                                                     </div>
                                                 </div>
                                                 <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">{{ $row->name }}</a></h4>
+                                                    <h4><a href="{{ url('/product/' . $row->slug) }}">{{ $row->name }}</a></h4>
                                                     <div class="price_box"> 
                                                         <span class="old_price"></span>
                                                         <span class="current_price">Rp.{{ number_format($row->price) }} </span>

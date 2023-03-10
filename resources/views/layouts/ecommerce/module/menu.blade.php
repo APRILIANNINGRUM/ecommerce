@@ -17,27 +17,15 @@
                                             <li><a href="index-2.html">Home 2</a></li>
                                         </ul>
                                     </li>
+                                    <li><a href="{{ route ('front.product')}}">Product</a></li>
+                                    <li><a href="{{ route ('about')}}">About US</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="sub_menu">
-                                            <li><a href="about.html">About Us</a></li>
                                             <li><a href="contact.html">Contact Us</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="shop-left-sidebar.html">Shop </a>
-                                        <ul class="sub_menu">
-                                            <li><a href="shop-left-sidebar.html">shop left sidebar</a></li>
-                                            <li><a href="shop-fullwidth.html">shop fullwidth</a></li>
-                                            <li><a href="shop-collection.html">shop collection</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{ route ('front.product')}}">Product</a></li>
-                                    <li><a href="blog.html">blog</a>
-                                        <ul class="sub_menu">
-                                            <li><a href="blog.html">Blog Pages</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <!--<li><a href="contact.html">Contact Us</a></li>--->
+        
                                 </ul>
                             </nav>
                         </div>
@@ -50,7 +38,7 @@
                                     <li class="header_search_btn"><a href="#"><img src="{{ asset('furnitures/assets/img/icon/search.png')}}" alt=""></a></li>
                                     <!-- <li class="shopping_cart"><a href="#"><img src="assets/img/icon/cart.png"
                                                 alt=""></a></li> -->
-                                    <li class="shopping_cart"><a href="{{route('front.cart')}}"><img src="{{ asset('furnitures/assets/img/icon/cart.png')}}" alt=""></a></li>
+                                    <li class="shopping_cart"><a href="{{route('front.cart')}}"><img src="{{ asset('furnitures/assets/img/icon/cart.png')}}" alt=""></a><span id="total" >3</span></li>
                                     <li class="account_link_menu"><a href="#"><img src="assets/img/icon/person.png" alt=""></a>
                                         <ul class="dropdown_account_link">
                                             <li><a href="">About Us</a></li>
@@ -77,6 +65,17 @@
                 </div>
             </div>
         </div>
+
     </header>
+    <script>
+        $.ajax({
+            url: "{{route ('customer.totalCart')}}",
+            type: 'GET',
+            success: function(data) {
+                $('.total').html(data);
+            }
+        });
+    </script>
+
     <!--mini cart-->
     

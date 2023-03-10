@@ -267,6 +267,15 @@
     <script src="{{ asset('furnitures/assets/js/jquery-waypoints.js') }}"></script>
     <script src="{{ asset('furnitures/assets/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('furnitures/assets/js/ajax-mail.js') }}"></script>
+    <script>
+        $.ajax({
+            url: "{{route ('customer.totalCart')}}",
+            type: 'GET',
+            success: function(data) {
+                $('.total').html(data);
+            }
+        });
+    </script>
 
 
     <!-- Main JS -->

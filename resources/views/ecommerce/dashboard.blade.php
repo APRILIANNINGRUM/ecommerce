@@ -32,6 +32,7 @@
 									<br><br>
 								<div class="card-text">
 									<p>{{ $orders[0]->shipping }} Pesanan</p>
+									<p></p>
 								</div>
 							</div>
 						</div>

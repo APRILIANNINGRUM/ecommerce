@@ -24,6 +24,9 @@ Route::get('/checkout/{invoice}', 'App\Http\Controllers\Ecommerce\CartController
 Route::get('/signup','App\Http\Controllers\Ecommerce\RegisterController@index')->name('signup');
 Route::post('/signup','App\Http\Controllers\Ecommerce\RegisterController@store')->name('signup');
 Route::get('/city/{province_id}', 'App\Http\Controllers\Ecommerce\CartController@getCity'); //ROUTE API UNTUK /CITY
+Route::get('/google-autocomplete', 'App\Http\Controllers\GoogleController@index') ->name ('index'); //ROUTE API UNTUK GOOGLE-AUTOCOMPLETE
+Route::get('/about', 'App\Http\Controllers\Ecommerce\FrontController@about') ->name ('about');
+
 
 Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
     Route::get('login', '\App\Http\Controllers\Ecommerce\LoginController@loginForm')->name('customer.login'); 
@@ -36,6 +39,8 @@ Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
         Route::get('orders/{invoice}', '\App\Http\Controllers\Ecommerce\OrderController@view')->name('customer.view_order');
         Route::get('payment', '\App\Http\Controllers\Ecommerce\OrderController@paymentForm')->name('customer.paymentForm');
         Route::post('payment', '\App\Http\Controllers\Ecommerce\OrderController@storePayment')->name('customer.savePayment');
+        Route::get('profile', '\App\Http\Controllers\Ecommerce\ProfileController@index')->name('customer.profile');
+        Route::get('total/cart', '\App\Http\Controllers\Ecommerce\CartController@totalCart')->name('customer.totalCart');
     });
 });
 
