@@ -38,7 +38,7 @@
                                     <li class="header_search_btn"><a href="#"><img src="{{ asset('furnitures/assets/img/icon/search.png')}}" alt=""></a></li>
                                     <!-- <li class="shopping_cart"><a href="#"><img src="assets/img/icon/cart.png"
                                                 alt=""></a></li> -->
-                                    <li class="shopping_cart"><a href="{{route('front.cart')}}"><img src="{{ asset('furnitures/assets/img/icon/cart.png')}}" alt=""></a><span id="total" >3</span></li>
+                                    <li class="shopping_cart"><a href="{{route('front.cart')}}"><img src="{{ asset('furnitures/assets/img/icon/cart.png')}}" alt=""></a><span class="total" ></span></li>
                                     <li class="account_link_menu"><a href="#"><img src="assets/img/icon/person.png" alt=""></a>
                                         <ul class="dropdown_account_link">
                                             <li><a href="">About Us</a></li>
@@ -67,15 +67,5 @@
         </div>
 
     </header>
-    <script>
-        $.ajax({
-            url: "{{route ('customer.totalCart')}}",
-            type: 'GET',
-            success: function(data) {
-                $('.total').html(data);
-            }
-        });
-    </script>
-
     <!--mini cart-->
     
