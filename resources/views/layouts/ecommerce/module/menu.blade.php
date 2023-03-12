@@ -38,7 +38,19 @@
                                     <li class="header_search_btn"><a href="#"><img src="{{ asset('furnitures/assets/img/icon/search.png')}}" alt=""></a></li>
                                     <!-- <li class="shopping_cart"><a href="#"><img src="assets/img/icon/cart.png"
                                                 alt=""></a></li> -->
-                                    <li class="shopping_cart"><a href="{{route('front.cart')}}"><img src="{{ asset('furnitures/assets/img/icon/cart.png')}}" alt=""></a><span class="total" ></span></li>
+                                    <li>
+                                        <a href="{{ route('front.cart')}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                                                <g id="Icon" transform="translate(-1524 -89)">
+                                                    <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.909" cy="0.952" rx="0.909" ry="0.952" transform="translate(1531.364 108.095)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                                    <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.909" cy="0.952" rx="0.909" ry="0.952" transform="translate(1541.364 108.095)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                                    <path id="Path_3" data-name="Path 3" d="M1,1H4.636L7.073,13.752a1.84,1.84,0,0,0,1.818,1.533h8.836a1.84,1.84,0,0,0,1.818-1.533L21,5.762H5.545" transform="translate(1524 89)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                                </g>
+                                            </svg>
+                                            
+                                            <span class="total"></span>
+                                        </a>
+                                    </li>
                                     <li class="account_link_menu"><a href="#"><img src="assets/img/icon/person.png" alt=""></a>
                                         <ul class="dropdown_account_link">
                                             <li><a href="">About Us</a></li>

@@ -220,12 +220,12 @@ class CartController extends Controller
     //kalo ngupdate pake Request $request di parameter
     //parameternya diisi atuh
     public function updateCart(Request $request ,$id){
-        //silakan diisi sendiri
-
+     
         //token csrf
         $cart = Cart::find($id);
         $cart->quantity = $request->qty;
         $cart->total = $request->qty * $cart->price;
+        
         $cart->save();
 
         //return redirect to cart page
@@ -235,6 +235,10 @@ class CartController extends Controller
     public function totalCart(){
 
         $cart = Cart::where('customer_id', auth()->guard('customer')->user()->id)->count();
+    
+        if(!auth()->guard('customer')->check()){
+            $cart = 0;
+        }
         return response()->json($cart);
     }
     public function deleteCart($id){

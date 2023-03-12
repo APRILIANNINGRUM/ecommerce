@@ -26,6 +26,7 @@ Route::post('/signup','App\Http\Controllers\Ecommerce\RegisterController@store')
 Route::get('/city/{province_id}', 'App\Http\Controllers\Ecommerce\CartController@getCity'); //ROUTE API UNTUK /CITY
 Route::get('/google-autocomplete', 'App\Http\Controllers\GoogleController@index') ->name ('index'); //ROUTE API UNTUK GOOGLE-AUTOCOMPLETE
 Route::get('/about', 'App\Http\Controllers\Ecommerce\FrontController@about') ->name ('about');
+Route::get('total/cart', '\App\Http\Controllers\Ecommerce\CartController@totalCart')->name('customer.totalCart');
 
 
 Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
@@ -40,7 +41,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
         Route::get('payment', '\App\Http\Controllers\Ecommerce\OrderController@paymentForm')->name('customer.paymentForm');
         Route::post('payment', '\App\Http\Controllers\Ecommerce\OrderController@storePayment')->name('customer.savePayment');
         Route::get('profile', '\App\Http\Controllers\Ecommerce\ProfileController@index')->name('customer.profile');
-        Route::get('total/cart', '\App\Http\Controllers\Ecommerce\CartController@totalCart')->name('customer.totalCart');
+    
     });
 });
 
@@ -60,5 +61,6 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     });
 });
 
+?>  
 
 

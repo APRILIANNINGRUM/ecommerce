@@ -27,8 +27,8 @@
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
         <!-- KARENA MODULENYA AKAN DIKERJAKAN PADA SUB BAB SELANJUTNYA -->
         <!-- HANYA SAJA DEMI KEMUDAHAN PENULISAN MAKA SAYA MASUKKAN PADA BAGIAN INI -->
-               
-                @csrf
+            <!--cart update + id-->
+		
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
                 <div class="container">
 				<div class="table-responsive">
@@ -46,6 +46,8 @@
 						<tbody>
               <!-- LOOPING DATA DARI VARIABLE CARTS -->
                        @forelse($carts as $row)
+					   <form action="{{ route('front.update_cart', $row->id) }}" method="post">
+                		@csrf
 							<tr style="text-align: center;">
 								<td style="text-align: center;">
 									
@@ -84,6 +86,7 @@
                                 <td colspan="4">Tidak ada belanjaan</td>
                             </tr>
                           @endforelse
+						  </form>
 							<tr class="bottom_button">
 								<td>
 									<button class="btn btn-primary btn-block">Update Cart</button>
@@ -185,6 +188,9 @@
 			$.ajax({
 				url: '/api/cart/{{ $row->id }}',
 				type: 'POST',
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
 				data: {
 				
 					qty: qty,
@@ -194,7 +200,7 @@
 				success: function (data) {
 					if (data.status == 'success') {
 				
-						//refresh page
+					
 						location.reload();
 					} else {
 						location.reload();
@@ -213,6 +219,9 @@
 			$.ajax({
 				url: '/api/cart/{{ $row->id }}',
 				type: 'POST',
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
 				data: {
 				
 					qty: qty,
@@ -221,9 +230,7 @@
 				dataType: 'json',
 				success: function (data) {
 					if (data.status == 'success') {
-				
-						//refresh page
-						
+							
 					} else {
 						location.reload();
 					}
