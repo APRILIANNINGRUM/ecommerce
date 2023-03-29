@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
+use DB;
+use App\Payment;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('customer_id', auth()->guard('customer')->user()->id)->orderBy('created_at', 'DESC')->paginate(10);
-        return view('ecommerce.orders.index', compact('orders'));
+        $latestOrder = Order::where('customer_id', auth()->guard('customer')->user()->id)->orderBy('created_at', 'DESC')->paginate(10);
+        return view('ecommerce.order', compact('latestOrder'));
     }
     public function view($invoice)
     {

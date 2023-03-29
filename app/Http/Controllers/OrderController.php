@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Customer;
+use App\District;
+use App\City;
+use App\Province;
 use App\Mail\OrderMail;
 use Mail;
 
@@ -13,7 +17,7 @@ class OrderController extends Controller
     {
     //QUERY UNTUK MENGAMBIL SEMUA PESANAN DAN LOAD DATA YANG BERELASI MENGGUNAKAN EAGER LOADING
     //DAN URUTANKAN BERDASARKAN CREATED_AT
-    $orders = Order::with(['customer.district.city.province'])
+    $orders = Order::with('customer', 'district', 'district.city', 'district.city.province')
         ->orderBy('created_at', 'DESC');
 
     //JIKA Q UNTUK PENCARIAN TIDAK KOSONG

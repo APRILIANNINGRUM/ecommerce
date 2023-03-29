@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderDetail;
+use App\Product;
 
 class LoginController extends Controller
 {
@@ -41,8 +43,22 @@ class LoginController extends Controller
             COALESCE(count(CASE WHEN status = 3 THEN subtotal END), 0) as shipping,
             COALESCE(count(CASE WHEN status = 4 THEN subtotal END), 0) as completeOrder')
             ->where('customer_id', auth()->guard('customer')->user()->id)->get();
+        $latestOrder = Order::with(['details'])->where('customer_id', auth()->guard('customer')->user()->id)->orderBy('id', 'desc')->limit(5)->get();
+      
+        $product=[];
+        foreach ($latestOrder as $order) {
+            foreach ($order->details as $detail) {
+                $product[] = $detail->product;
+            }
+        }
+        
 
-        return view('ecommerce.dashboard', compact('orders'));
+        return view('ecommerce.dashboard', compact('orders', 'latestOrder', 'product'));
+        // return response()->json([
+        //     'orders' => $orders,
+        //     'latestOrder' => $latestOrder,
+        //     'product' => $product
+        // ]);
     }
     public function logout()
     {

@@ -29,14 +29,14 @@
     <div id="wrapper">
 
         <!-- Sidebar ini sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{route ('customer.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -51,7 +51,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" aria-controls="collapseTwo" href="#">
+                <a class="nav-link" aria-controls="collapseTwo" href="{{route ('customer.profile') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Profil</span>
                 </a>
@@ -59,18 +59,12 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="{{route ('customer.orders')}}" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-cart-plus"></i>
                     <span>Pesanan</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Pengaturan</span>
-                </a>
-            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
             
@@ -167,7 +161,74 @@
                                 </div>
                             </div>
                         </div>
-                    
+                        <!-- Area Chart -->
+                        <div class="col-xl-10 col-lg-7" style="margin: 0 auto;">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Pesanan Terbaru</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <!--buat tabel disini-->
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <tr style="text-align: center">
+                                            <th >Invoice</th>
+                                            <th> Produk </th>
+                                            <th>Waktu</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                        </tr>
+
+                                        @foreach ($latestOrder as $latestOrder)
+                                        <tr>
+                                            <td>{{ $latestOrder->invoice }}</td>
+                                            <td>
+                                                <ul>
+                                                    @foreach ($latestOrder->details as $detail)
+                                                    <li>{{ $detail->product->name }} x {{ $detail->qty }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td>{{ $latestOrder->created_at }}</td>
+                                            <td>{{ $latestOrder->subtotal}}</td>
+                                            <td>
+                                                @if ($latestOrder->status == 0)
+                                                    <span class="badge badge-warning">Belum Dibayar</span>
+                                                @elseif ($latestOrder->status == 1)
+                                                    <span class="badge badge-info">Dibayar</span>
+                                                @elseif ($latestOrder->status == 2)
+                                                    <span class="badge badge-primary">Dikirim</span>
+                                                @elseif ($latestOrder->status == 3)
+                                                    <span class="badge badge-success">Selesai</span>
+                                                @endif
+                                            </td>
+                                         
+                                        </tr>
+                                        @endforeach
+
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     
                 </div>
