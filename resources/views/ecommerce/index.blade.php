@@ -13,13 +13,10 @@
                         <div class="swiper-wrapper">
                             <div class="single_slider swiper-slide d-flex align-items-center">
                                 <div class="slider_text">
-                                    <h2>Make your Home Feel <br> Comfortable</h2>
+                                    <h2>Buat Rumah Anda<br> Nyaman</h2>
                                     <div class="slider_text_shape">
                                         <!-- <img src="assets/img/slider/slider-text-shape.png" alt=""> -->
                                         <img src="{{ asset('furnitures/assets/img/slider/slider-text-shape.png')}}" alt="">
-                                        <div class="slider_btn">
-                                            <a class="btn btn-link" href="shop-left-sidebar.html">SHOP NOW</a>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -59,7 +56,7 @@
     <section class="choice_section mb-175">
         <div class="container">
             <div class="section_title text-center mb-105">
-                <h2>Best Collection</h2>
+                <h2>Selamat Datang</h2>
             </div>
             <div class="choice_container">
                 <div class="row choice_slick slick_slider_activation" data-slick='{
@@ -130,7 +127,7 @@
             <div class="product_tab_button">
                 <ul class="nav justify-content-center" role="tablist" id="nav-tab">
               
-                <h2>Best Seller</h2>
+                <h2>Produk Kami</h2>
                 <!--<li>
                         <a data-toggle="tab" href="#seller" role="tab" aria-controls="seller" aria-selected="false">
                             Best Seller </a>
@@ -142,6 +139,7 @@
                     <div class="product_gallery">
                         <div class="row">
             @forelse($products as $row)
+            
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <article class="single_product">
                                     <figure>
@@ -170,149 +168,6 @@
             </div>
         </div>
     </div>
-     <!-- featured section start-->
-     <section class="featured_banner_section">
-        <div class="container">
-            <div class="section_title text-center mb-105">
-                <h2>Featured Collections</h2>
-            </div>
-            <div class="featured_banner_inner">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="featured_thumb wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                            <!-- <a href="#"><img src="assets/img/bg/bg1.png" alt=""></a> -->
-                            <a href="#"><img src="{{ asset('furnitures/assets/img/bg/bg1.png')}}" alt=""></a>
-                            <div class="featured_text">
-                                <h3>SACANDINAVI LIVING ROOM</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="featured_banner_sidebar">
-                            <div class="featured_thumb mb-30 wow fadeInUp" data-wow-delay="0.2s"
-                                data-wow-duration="1.2s">
-                                <!-- <a href="#"><img src="assets/img/bg/bg2.png" alt=""></a> -->
-                                <a href="#"><img src="{{ asset('furnitures/assets/img/bg/bg2.png')}}" alt=""></a>
-                                <div class="featured_text">
-                                    <h3>MORDERN SOFA</h3>
-                                </div>
-                            </div>
-                            <div class="featured_thumb wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.3s">
-                                <!-- <a href="#"><img src="assets/img/bg/bg3.png" alt=""></a> -->
-                                <a href="#"><img src="{{ asset('furnitures/assets/img/bg/bg3.png')}}" alt=""></a>
-                                <div class="featured_text">
-                                    <h3>BEAUTIFUL CORNER</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- featured section end-->
-
-    <!-- testimonial section start -->
-    <section class="testimonial_section mb-75">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section_title text-center mb-90">
-                        <h2>What’s Clients Say</h2>
-                    </div>
-                    <div class="testimonial_container testimonial_swiper swiper-container wow fadeInUp"
-                        data-wow-delay="0.1s" data-wow-duration="1.1s">
-                        <div class="swiper-wrapper">
-                            <div class="single_testimonial swiper-slide">
-                                <div class="testimonial_desc">
-                                    <!-- <img src="assets/img/icon/blockcode.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/icon/blockcode.png')}}" alt="">
-                                    <p>Guys, you don't just buy the theme, you also buy excellent support from the devs,
-                                        so be sure that whatever problem you face, they will help you with it ;) 5
-                                        stars!</p>
-                                </div>
-                                <div class="testimonial_author">
-                                    <!-- <img src="assets/img/others/testi-author1.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/others/testi-author1.png')}}" alt="">
-                                    <h3><a href="#">Jerome Bell • Indiana</a></h3>
-                                </div>
-                            </div>
-                            <div class="single_testimonial swiper-slide">
-                                <div class="testimonial_desc">
-                                    <!-- <img src="assets/img/icon/blockcode.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/icon/blockcode.png')}}" alt="">
-                                    <p>Pretty nice theme. The quality of the documentation is not good. The don't even
-                                        explain some of the options. They just have a screen shot of the admin page.</p>
-                                </div>
-                                <div class="testimonial_author">
-                                    <!-- <img src="assets/img/others/testi-author2.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/others/testi-author2.png')}}" alt="">
-                                    <h3><a href="#">Floyd Miles • LA</a></h3>
-                                </div>
-                            </div>
-                            <div class="single_testimonial swiper-slide">
-                                <div class="testimonial_desc">
-                                    <!-- <img src="assets/img/icon/blockcode.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/icon/blockcode.png')}}" alt="">
-                                    <p>Guys, you don't just buy the theme, you also buy excellent support from the devs,
-                                        so be sure that whatever problem you face, they will help you with it ;) 5
-                                        stars!</p>
-                                </div>
-                                <div class="testimonial_author">
-                                    <!-- <img src="assets/img/others/testi-author1.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/others/testi-author1.png')}}" alt="">
-                                    <h3><a href="#">Jerome Bell • Indiana</a></h3>
-                                </div>
-                            </div>
-                            <div class="single_testimonial swiper-slide">
-                                <div class="testimonial_desc">
-                                    <!-- <img src="assets/img/icon/blockcode.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/icon/blockcode.png')}}" alt="">
-                                    <p>Guys, you don't just buy the theme, you also buy excellent support from the devs,
-                                        so be sure that whatever problem you face, they will help you with it ;) 5
-                                        stars!</p>
-                                </div>
-                                <div class="testimonial_author">
-                                    <!-- <img src="assets/img/others/testi-author1.png" alt=""> -->
-                                    <img src="{{ asset('furnitures/assets/img/others/testi-author1.png')}}" alt="">
-                                    <h3><a href="#">Jerome Bell • Indiana</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add Arrows -->
-                        <!-- <div class="swiper-pagination"></div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- testimonial section end -->
-
-    <!-- banner advice section start -->
-    <section class="banner_advice_section mb-100">
-        <div class="container">
-            <div class="banner_advice_inner">
-                <div class="row">
-                    <div class="col-lg-5 offset-lg-7 col-md-5 offset-md-7">
-                        <div class="banner_advice_text">
-                            <h3 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">New armchair <br> &
-                                pillow</h3>
-                            <a class="btn btn-link wow fadeInUp" href="#" data-wow-delay="0.2s"
-                                data-wow-duration="1.2s">SHOP NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="banner_position_img">
-                    <!-- <img src="assets/img/others/armchair.png" alt=""> -->
-                    <img src="{{ asset('furnitures/assets/img/others/armchair.png')}}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="banner_position_text">
-            <h2>New armchair <br> & pillow</h2>
-        </div>
-    </section>
-    <!-- banner advice section end -->
-
+   
     <!-- product section end -->
 @endsection

@@ -105,7 +105,7 @@ class CartController extends Controller
     }
     public function checkout()
     { 
-            $provinces = Province::orderBy('created_at', 'DESC')->get();
+            $provinces = Province::find(10);
             $carts = Cart::with('product')->where('customer_id', auth()->guard('customer')->user()->id)->get();
             $subtotal = 0;
             foreach($carts as $cart){
@@ -125,7 +125,7 @@ class CartController extends Controller
     public function getCity(Request $request)
     {
         //get parameter province_id
-        $cities = City::where('province_id', request()->province_id)->get();
+        $cities = City::find([398, 399]);
         return response()->json(['status' => 'success', 'data' => $cities]);
         
     }
@@ -182,7 +182,7 @@ class CartController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'customer_address' => $request->customer_address,
                 'district_id' => $request->district_id,
-                'subtotal' => $subtotal
+                'subtotal' => $subtotal + 150000
             ]);
 
             foreach ($carts as $row) {

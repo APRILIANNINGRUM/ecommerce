@@ -81,10 +81,6 @@
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children active">
                                     <a href="#">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                    </ul>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="#">Pages</a>
@@ -124,26 +120,16 @@
                     <div class="main_header d-flex justify-content-between align-items-center">
                         <div class="header_logo">
                             <!-- <a class="sticky_none" href="index.html"><img src="assets/img/logo/logo.png" alt=""></a> -->
-                            <a class="sticky_none" href="index.html"><img src="{{ asset('furnitures/assets/img/logo/logo.png')}}" alt=""></a>
+                            <a class="sticky_none" href="index.html"><img src="{{ asset('furnitures/assets/img/logo/logo.png')}}" alt="" height="120px" width="120px"></a>
                         </div>
                         <!--main menu start-->
                         <div class="main_menu d-none d-lg-block">
                             <nav>
                                 <ul class="d-flex">
-                                    <li><a class="active" href="{{ route ('front.index')}}" >Home</a>
-                                        <ul class="sub_menu">
-                                            <li><a href="index.html">Home 1</a></li>
-                                            <li><a href="index-2.html">Home 2</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a class="active" href="{{ route ('front.index')}}" >Home</a></li>
                                     <li><a href="{{ route ('front.product')}}">Product</a></li>
                                     <li><a href="{{ route ('about')}}">About US</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="sub_menu">
-                                            <li><a href="contact.html">Contact Us</a></li>
-                                        </ul>
-                                    </li>
-                                    <!--<li><a href="contact.html">Contact Us</a></li>--->
+                                    <!--<li><a href="contact.html">Contact Us</a> </li>-->
         
                                 </ul>
                             </nav>
@@ -154,7 +140,7 @@
                                 <ul class="d-flex">
                                     <!-- <li class="header_search_btn"><a href="#"><img src="assets/img/icon/search.png"
                                                 alt=""></a></li> -->
-                                    <li class="header_search_btn"><a href="#"><img src="{{ asset('furnitures/assets/img/icon/search.png')}}" alt=""></a></li>
+                                    <!--<li class="header_search_btn"><a href="#"><img src="{{ asset('furnitures/assets/img/icon/search.png')}}" alt=""></a></li>-->
                                     <!-- <li class="shopping_cart"><a href="#"><img src="assets/img/icon/cart.png"
                                                 alt=""></a></li> -->
                                     <li>
@@ -170,12 +156,12 @@
                                             <span class="total"></span>
                                         </a>
                                     </li>
-                                    <li class="account_link_menu"><a href="#"><img src="assets/img/icon/person.png" alt=""></a>
+                                    <!--<li class="account_link_menu"><a href="#"><img src="assets/img/icon/person.png" alt=""></a>
                                         <ul class="dropdown_account_link">
                                             <li><a href="">About Us</a></li>
                                             <li><a href="">Contact Us</a></li>
                                         </ul>
-                                    </li>
+                                    </li>-->
                                     <li class="user">
                                         
                                         @if (Auth::guard('customer')->check())

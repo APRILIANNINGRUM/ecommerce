@@ -1,11 +1,11 @@
-@extends('layouts.ecommerce')
+    @extends('layouts.ecommerce')
 
-@section('title')
-    <title>Keranjang Belanja - BySkin</title>
-@endsection
+	@section('title')
+		<title>Keranjang Belanja - CV. Kawan Sejati </title>
+	@endsection
 
-@section('content')
-    <!--================Home Banner Area =================-->
+	@section('content')
+	<!--================Home Banner Area =================-->
     <section class="banner_area">
 		<div class="banner_inner d-flex align-items-center">
 			<div class="container">

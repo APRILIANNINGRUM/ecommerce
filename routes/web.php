@@ -42,7 +42,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function() {
         Route::post('payment', '\App\Http\Controllers\Ecommerce\OrderController@storePayment')->name('customer.savePayment');
         Route::get('profile', '\App\Http\Controllers\Ecommerce\ProfileController@index')->name('customer.profile');
         Route::get('profile/edit/{id}', '\App\Http\Controllers\Ecommerce\ProfileController@edit')->name('customer.edit_profile');
-        Route::post('profile/update/{id}', '\App\Http\Controllers\Ecommerce\ProfileController@update')->name('customer.update_profile');
+        Route::post('profile/update', '\App\Http\Controllers\Ecommerce\ProfileController@update')->name('customer.update_profile');
     
     });
 });

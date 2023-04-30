@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-    <title>BySkin - Pusat Belanja Online</title>
+    <title>CV. Kawan Sejati - Pusat Belanja Online</title>
 @endsection
 
 @section('content')
@@ -14,22 +14,22 @@
                     <div class="breadcrumb_content text-center">
                         <h2>Shop</h2>
                         <ul class="d-flex justify-content-center">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{ route('front.index') }}">Home</a></li>
                             <li>></li>
-                            <li><a href="shop-left-sidebar.html">shop Left Sidebar</a></li>
+                            <li><a href="{{ route ('front.product') }}">Shop</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>         
     </div>
-
     <!-- shop page section satrt -->
     <div class="shop_page_section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="shop_page_inner d-flex ">
+                    <br><br>
                         <div class="shop_sidebar_widget">
                             <div class="shop_widget_list categories">
                                 <div class="shop_widget_title categories_title">
@@ -43,52 +43,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="shop_widget_list">
-                                <div class="shop_widget_title">
-                                    <h3>by prices</h3>
-                                </div>
-                                <div class="widget_proce_filter">
-                                    <form action="#"> 
-                                        <input type="text" id="amount">
-                                        <div id="slider-range"></div>
-                                        <button type="submit">Filter Price</button>
-                                    </form> 
-                                </div>
-                            </div>
-                            <div class="shop_widget_list">
-                                <div class="shop_widget_title">
-                                    <h3>by colors</h3>
-                                </div>
-                                <div class="widget_color">
-                                    <ul>
-                                        <li><a class="color1" href="javascript:void(0)"></a></li>
-                                        <li><a class="color2" href="javascript:void(0)"></a></li>
-                                        <li><a class="color3" href="javascript:void(0)"></a></li>
-                                        <li><a class="color4" href="javascript:void(0)"></a></li>
-                                        <li><a class="color5" href="javascript:void(0)"></a></li>
-                                        <li><a class="color6" href="javascript:void(0)"></a></li>
-                                        <li><a class="color7" href="javascript:void(0)"></a></li>
-                                    </ul>
-                                </div>
-                                <div class="widget_color_btn">
-                                    <a href="#">FILTER COLOR</a>
-                                </div>
-                            </div>
-                            <div class="shop_widget_list">
-                                <div class="shop_widget_title">
-                                    <h3>Tags cloud</h3>
-                                </div>
-                                <div class="widget_tags">
-                                    <ul>
-                                        <li><a href="#">FURNITURE</a></li>
-                                        <li><a href="#">DECOR</a></li>
-                                        <li><a href="#">INTERIOR</a></li>
-                                        <li><a href="#">Bed room</a></li>
-                                        <li><a href="#">Plants</a></li>
-                                        <li><a href="#">bath room</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            
                             <div class="shop_widget_thumb">
                                 <img src="assets/img/others/shop-sidebar.png" alt="">
                             </div>
@@ -96,35 +51,20 @@
                         <div class="shop_right_sidaber">
                             <div class="shop_top_bar d-flex justify-content-between">
                                 <div class="shop_product_count">
-                                    <span>Show 9 / 12  / 18 / 24</span>
+                                    <span>Produk Kami</span>
                                 </div>
-                                <div class="shop_top_right d-flex">
-                                    <div class="product_sorting">
-                                        <select>
-                                            <option selected value="1">Default Sorting</option>
-                                            <option value="1">Default Sorting2</option>
-                                            <option value="1">Default Sorting3</option>
-                                            <option value="1">Default Sorting3</option>
-                                        </select>
-                                    </div>
-                                    <div class="shop_filter">
-                                        <select>
-                                            <option selected value="1">Filter</option>
-                                            <option value="1">Filter2</option>
-                                            <option value="1">Filter3</option>
-                                            <option value="1">Filter4</option>
-                                        </select>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div class="shop_gallery">
                                 <div class="row">
                             @forelse($products as $row)
+
                                     <div class="col-lg-4 col-md-4 col-sm-6">
+                                       
                                         <article class="single_product">
                                             <figure>
                                                 <div class="product_thumb">
-                                                    <a href="{{ url('/product/' . $row->slug) }}"><img src="{{ asset('storage/products/' . $row->image) }} " alt="{{ $row->image }}" height="500px" width="500px"></a>
+                                                    <a href="{{ url('/product/' . $row->slug) }}"><img src="{{ asset('storage/products/' . $row->image) }} " alt="{{ $row->image }}" height="300px" width="300px"></a>
                                                     <div class="label_product">
                                                         <span class="label_sale">Sale</span>
                                                     </div>
@@ -138,21 +78,12 @@
                                                 </figcaption>  
                                             </figure>
                                         </article>
+                                     
                                     </div>
                             @empty
 
                             @endforelse
                                 </div>
-                            </div>
-                            <div class="loding_bar">
-                                <ul class="d-flex justify-content-center">
-                                    <li><a href="#">01</a></li>
-                                    <li><a href="#">02</a></li>
-                                    <li><a href="#">03</a></li>
-                                    <li><a href="#">04</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>

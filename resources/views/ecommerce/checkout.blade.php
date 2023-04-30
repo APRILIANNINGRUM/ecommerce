@@ -61,10 +61,7 @@
                             <label for="">Propinsi</label>
                             <select class="form-control" name="province_id" id="province_id" required>
                                 <option value="">Pilih Propinsi</option>
-                              	<!-- LOOPING DATA PROVINCE UNTUK DIPILIH OLEH CUSTOMER -->
-                                @foreach ($provinces as $row)
-                                <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                @endforeach
+                                <option value="{{$provinces->id}}">{{$provinces->name}}</option>
                             </select>
                             
                             <p class="text-danger">{{ $errors->first('province_id') }}</p>
@@ -119,12 +116,15 @@
 								</li>
 								<li style="margin-bottom: 8px">
 									<a href="#">Pengiriman
-										<span>Rp 0</span>
+										<span>Rp. 150.000</span>
 									</a>
 								</li>
 								<li style="margin-bottom: 8px">
 									<a href="#">Total
-										<span></span>
+										<span>
+                                            <?php $total = $subtotal + 150000;?>
+                                            Rp. {{number_format($total, 0, ',', '.')}} 
+                                        </span>
 									</a>
 								</li>
 							</ul>

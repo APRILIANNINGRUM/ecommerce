@@ -121,43 +121,68 @@
                                         <p>{{$province->name}}</p>
                                     @endforeach -->
                                     <div class="col-md-12" >
-                                    <form action="{{route('customer.update_profile', $customer->id)}}" method="post">
+                                    <form action="{{route('customer.update_profile')}}" method="post">
                                     @csrf
                                     <table class="table table-bordered">
                                         <tr>
                                             <td>Nama</td>
-                                            <td><input type="text" name="name" value="{{$customer->name}}"></td>
+                                            <td><input type="text" name="name" value="{{$customer->name}}" class="form-control"></td>
                                         </tr>
                                         <tr>
                                             <td>Email</td>
-                                            <td><input type="text" name="email" value="{{$customer->email}}"></td>
+                                            <td><input type="text" name="email" value="{{$customer->email}}" class="form-control"></td>
                                         </tr>
                                         <tr>
                                             <td>Telepon</td>
-                                            <td><input type="number" name="phone_number" value="{{$customer->phone_number}}"></td>
+                                            <td><input type="number" name="phone_number" value="{{$customer->phone_number}}" class="form-control"></td>
                                         <tr>
                                             <td>Provinsi</td>
-                                            @foreach($provinces as $province) 
                                             <td>
-                                                {{$province->name}}
+                                                <select name ="provinces_id" id="provinces_id" class="form-control"> 
+                                                @foreach($provinces as $province)
+                                                    <option value="{{$province->id}}" {{$customer->province_id == $province->id ? 'selected' : ''}}>{{$province->name}}</option>
+                                                @endforeach
+
+                                                @foreach ($prov as $province)
+                                                    <option value="{{$province->id}}" {{$customer->province_id == $province->id ? 'selected' : ''}}>{{$province->name}}</option>
+                                                @endforeach
+                                                </select> 
                                             </td>
-                                            @endforeach
                                         </tr>
                                         <tr>
                                             <td>Kota</td>
-                                            @foreach($cities as $city) 
                                             <td>
-                                                {{$city->name}}
+                                                <select name="cities_id" id="cities_id" class="form-control">
+                                                
+                                                @foreach($cities as $city) 
+                                                    <option value="{{ $city->id}}" {{$customer->city_id == $city->id ? 'selected' : ''}}> {{$city->name}} </option>
+                                                @endforeach
+                                                @foreach ($cit as $city)
+                                                        <option value="{{$city->id}}" {{$customer->city_id == $city->id ? 'selected' : ''}}>{{$city->name}}</option>
+                                                @endforeach
+                                                </select>
                                             </td>
-                                            @endforeach
+                                        </tr>
+                                        <tr>
+                                            <td>Kecamatan</td>
+                                            <td>
+                                                <select name="district_id" id="districs_id" class="form-control">
+                                                @foreach($districts as $district) 
+                                                    <option value="{{ $district->id}}" {{$customer->district_id == $district->id ? 'selected' : ''}}> {{$district->name}} </option>
+                                                @endforeach
+                                                @foreach ($dis as $district)
+                                                        <option value="{{$district->id}}" {{$customer->district_id == $district->id ? 'selected' : ''}}>{{$district->name}}</option>
+                                                @endforeach
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Alamat</td>
-                                            <td><input type="text" name="address" value="{{$customer->address}}"></td>  
+                                            <td><input type="text" name="address" value="{{$customer->address}}" class="form-control"></td>  
                                         </tr>
                                         <tr>
                                             <td>Password</td>
-                                            <td><input type="password" name="password" ></td>
+                                            <td><input type="password" name="password" class="form-control"></td>
                                         <tr>
                                             <td></td>
                                             <td><button type="submit" class="btn btn-primary">Simpan</button></td>

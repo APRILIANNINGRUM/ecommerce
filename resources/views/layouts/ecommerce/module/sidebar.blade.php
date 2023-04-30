@@ -12,7 +12,7 @@
             <li class="icon-customers"><a href="{{ route('customer.orders') }}">Pesanan</a></li>
             </div>
             <div class="card" style="background-color: #bdc3c7; padding: 10px; 10px; margin-bottom: 10px;">
-            <li class="icon-users"><a href="">Pengaturan</a></li>
+            <li class="icon-users"><a href="">Pengaturan</a></li> 
             </div>
             
         </ul>

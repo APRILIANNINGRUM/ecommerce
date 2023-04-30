@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-    <title>BySkin - Pusat Belanja Online</title>
+    <title>Pusat Belanja Online</title>
 @endsection
 
 @section('content')
@@ -218,7 +218,7 @@
                                                         <li><a href="#"><i class="ion-star"></i></a></li>
                                                     </ul>   
                                                 </div>
-                                                <p><strong>admin </strong>- September 12, 2018</p>
+                                                <p><strong>admin </strong>- Maret 20, 2023</p>
                                                 <span>roadthemes</span>
                                             </div>
                                         </div>

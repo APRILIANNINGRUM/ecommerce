@@ -7,17 +7,17 @@
 @section('content')
     <!-- dari sini-->
 
-        <section class="hero_about_section d-flex align-items-center" data-bgimg="{{ asset('furnitures/assets/img/bg/about-hero.png')}}">
+        <section class="hero_about_section d-flex align-items-center" data-bgimg="{{ asset('furnitures/assets/img/bg/about-hero.png')}}" alt="" height="500px" width="200px">
       
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="hero_about_content">
-                        <h2 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">Welcome to <br> <span>BeFurniture Store</span></h2>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">Selamat Datang di<br> <span>Tempat Kami</span></h2>
                         <ul class="d-flex wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{ route('front.index') }}">Home</a></li>
                             <li>></li>
-                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="{{ route('about') }}">About Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -28,142 +28,26 @@
 
     <!-- about luxury section start -->
     <section class="about_luxury_section">
-        <div class="container-fluid">
-            <div class="row no-gutters">
-                <div class="col-12">
+        <div class=container>
+            <div class="col-12">
                     <div class="about_luxury_inner d-flex align-items-center">
-                        <div class="about_luxury_thumb">
-                            <img src= "{{ asset('furnitures/assets/img/bg/about1.png') }}" alt="">
-                            
-
-
-                        </div>
                         <div class="about_luxury_content">
                             <div class="luxury_content_top">
-                                <h3 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">Premium Luxury Furniture</h3>
+                                <h2 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">CV. Kawan Sejati</h2>
+                                <h3 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">Interior & Meubel</h3>
                                 <p class="mb-30 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum aspernatur doloribus eligendi. Adipisci explicabo ullam natus magnam quae minus aspernatur.</p>
                                 <p class="wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.3s">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora obcaecati aut cumque magni ab consectetur, blanditiis quisquam eveniet maiores quo exercitationem! Voluptates quos fugiat sit.</p>
                             </div>
-                            <div class="luxury_blockquote d-flex wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                                <img src="{{ asset ('furnitures/assets/img/icon/blockcode.png') }}" alt="">
-                                <p>Guys, you don't just buy the theme, you also buy excellent support from the devs, so be sure that whatever problem you face, they will help you with it ;) 5 stars!</p>
-                            </div>
-                            <div class="luxury_author d-flex align-items-center wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
-                                <img src="{{asset('furnitures/assets/img/others/testi-author1.png')}}" alt="">
-                                <h3><a href="#">Jerome Bell • Indiana</a></h3>
-                            </div>
                         </div>
                     </div>
-                </div>
             </div>
-        </div>
+        </div> 
     </section>
     <!-- about luxury section end -->
-
-     <!-- about vision section start -->
-     <section class="about_vision_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="about_vision_inner d-flex align-items-center">
-                        <div class="about_vision_content">
-                            <div class="vision_content_top">
-                                <h3 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">Our Vision</h3>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum aspernatur doloribus eligendi. Adipisci explicabo ullam natus magnam quae minus.</p>
-                            </div>
-                            <div class="about_progressbar wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
-                                <div class="progress_list one">
-                                    <div class="about_design_discount d-flex justify-content-between">
-                                        <span class="progress_design">Creative Design</span>
-                                        <span class="progress_discount">95%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar about_prog wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".3s" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="progress_list two">
-                                    <div class="about_design_discount d-flex justify-content-between">
-                                        <span class="progress_design">Ui Design</span>
-                                        <span class="progress_discount">85%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar about_prog wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".5s" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="progress_list three">
-                                    <div class="about_design_discount d-flex justify-content-between">
-                                        <span class="progress_design">WordPrees Development</span>
-                                        <span class="progress_discount">92%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar about_prog wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".7s" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="about_vision_thumb">
-                            <img src="{{asset ('furnitures/assets/img/bg/about2.png') }}" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- about vision section end -->
     <center>
     <div class="mapouter"><div class="gmap_canvas"><iframe width="1098" height="401" id="gmap_canvas" src="https://maps.google.com/maps?q=udinus&t=&z=10&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://2yu.co">2yu</a><br><style>.mapouter{position:relative;text-align:right;height:401px;width:1098px;}</style><a href="https://embedgooglemap.2yu.co">html embed google map</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:401px;width:1098px;}</style></div></div>
     </center>
 
-    <!-- our team section start -->
-    <section class="our_team_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="our_team_title text-center wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                        <h2>Our Talent Team</h2>
-                    </div>
-                    <div class="our_team_inner d-flex justify-content-center">
-                        <div class="single_team wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                            <div class="team_thumb">
-                                <img src="{{asset ('furnitures/assets/img/others/team1.png') }}" alt="">
-                            </div>
-                            <div class="team_name">
-                                <h3><a href="#">Jerome Bell</a></h3>
-                            </div>
-                        </div>
-                        <div class="single_team wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
-                            <div class="team_thumb">
-                                <img src="{{ asset ('furnitures/assets/img/others/team2.png') }}" alt="">
-                            </div>
-                            <div class="team_name">
-                                <h3><a href="#">Courtney Henry</a></h3>
-                            </div>
-                        </div>
-                        <div class="single_team wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.3s">
-                            <div class="team_thumb">
-                                <img src="{{ asset ('furnitures/assets/img/others/team3.png') }}" alt="">
-                            </div>
-                            <div class="team_name">
-                                <h3><a href="#">Cody Fisher</a></h3>
-                            </div>
-                        </div>
-                        <div class="single_team wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1.4s">
-                            <div class="team_thumb">
-                                <img src="{{ asset ('furnitures/assets/img/others/team4.png')}}" alt="">
-                            </div>
-                            <div class="team_name">
-                                <h3><a href="#">Bessie Cooper</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- our team section end -->
 @endsection
 
 @section('js')

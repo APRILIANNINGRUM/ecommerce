@@ -43,7 +43,12 @@ class ProfileController extends Controller
         $provinces = Province::where('id', $customer->district->province_id)->orderBy('name', 'ASC')->get();
         $cities = City::where('id', $customer->district->city_id)->orderBy('name', 'ASC')->get();
         $districts = District::where('id', $customer->district_id)->orderBy('name', 'ASC')->get();
-        return view('ecommerce.edit', compact('customer', 'provinces', 'cities','districts'));
+
+        $prov = Province::orderBy('created_at', 'DESC')->get();
+        $cit = City::orderBy('created_at', 'DESC') ->get();
+        $dis = District::orderBy('created_at', 'DESC') ->get();
+
+        return view('ecommerce.edit', compact('customer', 'provinces', 'cities','districts', 'prov', 'cit', 'dis'));
         // return response()->json([
         //     'customer' => $customer,
         //     'provinces' => $provinces,
@@ -53,18 +58,25 @@ class ProfileController extends Controller
         // ]);
     }       
     
-    public function update (Request $request, $id)
+    public function update (Request $request)
     {
-        $customer = Customer::find($id);
-        $customer->name = request('name');
-        $customer->email = request('email');
-        $customer->phone_number = request('phone_number');
-        $customer->address = request('address');
-       //hash passsword
-        $password = Hash::make(request('password'));
-        $customer->password = $password;
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone_number' => 'required',
+            'address' => 'required|string',
+            'password' => 'nullable|string|min:8',
+            'district_id' => 'required',
+        
+        ]);
 
-        $customer->save();
+        $customer = auth()->guard('customer')->user();
+        $data = $request->only('name', 'email', 'phone_number', 'address', 'district_id');
+        if($request->password){
+            $data['password'] = $request->password;
+        }
+        $customer->update($data);
+
         return redirect()->route('customer.profile');
 
     }

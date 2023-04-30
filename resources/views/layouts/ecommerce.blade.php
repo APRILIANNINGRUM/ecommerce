@@ -82,35 +82,7 @@
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children active">
-                                    <a href="#">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Shop</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-left-sidebar.html">shop left sidebar</a></li>
-                                        <li><a href="shop-fullwidth.html">shop fullwidth</a></li>
-                                        <li><a href="shop-collection.html">shop collection</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="single-product.html">Product</a></li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">blog</a></li>
-                                        <li><a href="blog-details.html">blog details</a></li>
-                                    </ul>
-                                </li>
+                                    <a href="{{ route (('front.index')) }}">Home</a></li>
                                 <li class="menu-item-has-children"><a href="contact.html">Contact Us</a></li>
                             </ul>
                         </div>
@@ -141,102 +113,49 @@
                                 <!-- <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a> -->
                                 <a href="index.html"><img src="{{ asset('furnitures/assets/img/logo/logo.png')}}" alt=""></a>
                             </div>
-                            <div class="footer_social">
-                                <ul class="d-flex">
-                                    <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-vimeo"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
                         <div class="footer_sidebar d-flex">
                             <div class="footer_widget_list">
                                 <div class="footer_widget_title">
-                                    <h3>COMPANY</h3>
+                                    <h3>KATEGORI</h3>
                                 </div>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Help Center</a></li>
-                                        <li><a href="#">Licenses</a></li>
-                                        <li><a href="#">Market API</a></li>
-                                        <li><a href="#">Site Map</a></li>
+                                        <li><a href="#">Lemari</a></li>
+                                        <li><a href="#">Kursi</a></li>
+                                        <li><a href="#">Meja</a></li>
                                     </ul>
                                 </div>
                             </div>
 
                             <div class="footer_widget_list">
                                 <div class="footer_widget_title">
-                                    <h3>MORE FROM US</h3>
+                                    <h3>INFORMASI</h3>
                                 </div>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">Mobile and Layout Apps</a></li>
-                                        <li><a href="#">Marketplace</a></li>
-                                        <li><a href="#">About Vendors</a></li>
-                                        <li><a href="#">Gift Vouchers</a></li>
+                                        <li><a href="{{ route ('about') }}">About us</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="footer_widget_list">
                                 <div class="footer_widget_title">
-                                    <h3>Userful Links</h3>
+                                    <h3>Kontak Kami</h3>
                                 </div>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">The Collections</a></li>
-                                        <li><a href="#">Size Guide</a></li>
-                                        <li><a href="#">Fashion Inspiration</a></li>
-                                        <li><a href="#">Look Book</a></li>
-                                        <li><a href="#">Instagram Shop</a></li>
+                                        <li>Jl. Roro Jonggrang XII/no.12, Semarang<li>
+                                        <li>Telepon : 081235465919</li>
+                                        
                                     </ul>
                                 </div>
                             </div>
-                            <div class="footer_widget_list">
-                                <div class="footer_widget_title">
-                                    <h3>Sing up for newsletter</h3>
-                                </div>
-                                <div class="newsletter_subscribe">
-                                    <form id="mc-form">
-                                        <input id="mc-email" type="email" autocomplete="off"
-                                            placeholder="Email address... ">
-                                        <button id="mc-submit">Subscribe</button>
-                                    </form>
-                                    <!-- mailchimp-alerts Start -->
-                                    <div class="mailchimp-alerts text-centre">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                    </div><!-- mailchimp-alerts end -->
-                                </div>
-                                <div class="instagram_shop">
-                                    <h3>instagram shop</h3>
-                                    <div class="instagram_inner d-flex">
-                                        <div class="instagram_img">
-                                            <!-- <a href="#"><img src="assets/img/others/instagram1.png" alt=""></a> -->
-                                            <a href="#"><img src="{{ asset('furnitures/assets/img/others/instagram1.png')}}" alt=""></a>
-                                        </div>
-                                        <div class="instagram_img">
-                                            <!-- <a href="#"><img src="assets/img/others/instagram2.png" alt=""></a> -->
-                                            <a href="#"><img src="{{ asset('furnitures/assets/img/others/instagram2.png')}}" alt=""></a>
-                                        </div>
-                                        <div class="instagram_img">
-                                            <!-- <a href="#"><img src="assets/img/others/instagram3.png" alt=""></a> -->
-                                            <a href="#"><img src="{{ asset('furnitures/assets/img/others/instagram3.png')}}" alt=""></a>
-                                        </div>
-                                        <div class="instagram_img">
-                                            <!-- <a href="#"><img src="assets/img/others/instagram4.png" alt=""></a> -->
-                                            <a href="#"><img src="{{ asset('furnitures/assets/img/others/instagram4.png')}}" alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="footer_bottom">
                         <div class="copyright_right text-center">
-                            <p>&copy; 2021 All rights reserved This template is Made with <i class="ion-heart"></i>
-                                by <a href="https://hasthemes.com">HasThemes</a></p>
+                            <p>&copy; 20233 All Rights Reserved 
                         </div>
                     </div>
                 </div>
