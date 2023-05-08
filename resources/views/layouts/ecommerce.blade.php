@@ -111,7 +111,7 @@
                         <div class="footer_left">
                             <div class="footer_logo">
                                 <!-- <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a> -->
-                                <a href="index.html"><img src="{{ asset('furnitures/assets/img/logo/logo.png')}}" alt=""></a>
+                                <a href="index.html"><img src="{{ asset('furnitures/assets/img/logo/logo1.png')}}" style="width:400px; height: 300px">
                             </div>
                         </div>
                         <div class="footer_sidebar d-flex">

@@ -26,11 +26,13 @@
     <div class="product_gallery_section">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
                     <div class="product_gallery_inner d-flex">
                         <div class="product_gallery_list">
                             <div class="product_gallery_thumb">
-                                <a href="#"><img src="{{ asset('storage/products/' . $product->image) }}" alt=""></a>
+                                <a href="#"><img src="{{ asset('storage/products/' . $product->image) }}"  >
                             </div>
                         </div>
                         
@@ -44,6 +46,8 @@
                         </ul>
                     </div>
                 </div>
+                <div class="col-md-3">
+                </div>
             </div>
         </div>
     </div>
@@ -55,7 +59,7 @@
             <form action="{{ route('front.add_cart')}}" method="post">
             @csrf
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <div class="product_details_left">
                         <form action="#">
                             <div class="product_ratting_stock d-flex">
@@ -82,30 +86,11 @@
                             <div class="product_desc">
                             {!! $product->description !!}                           
                             </div>
-                            <div class="product_color_size d-flex">
-                                <div class="product_variant_size">
-                                    <select>
-                                        <option value="1">Select Size</option>
-                                        <option value="2">Select Size2</option>
-                                        <option value="3">Select Size3</option>
-                                        <option value="4">Select Size4</option>
-                                    </select>
-                                </div>
-                                <div class="product_variant_color d-flex align-items-center">
-                                    <label>Select Color</label>
-                                    <ul class="d-flex">
-                                        <li><a class="color1" href="#"></a></li>
-                                        <li><a class="color2" href="#"></a></li>
-                                        <li><a class="color3" href="#"></a></li>
-                                        <li><a class="color4" href="#"></a></li>
-                                        <li><a class="color5" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                           
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <div class="product_details_right">
                         <div class="product_d_meta">
                             <span>SKU: N/A <br>
@@ -117,7 +102,11 @@
                             <div class="pro-qty border">
                                 <input min="1" max="100" type="tex" value="1" name="qty">
                             </div>
-                            <button class="btn btn-link" type="submit">add to cart</button>  
+                            <button class="btn btn-link" type="submit">Keranjang</button>  &nbsp;&nbsp;
+
+                            <a href="https://api.whatsapp.com/send?phone=+6285881594312&text=Halo%20Admin%20Saya%20Mau%20Custom%20Produk%20{{ $product->name }}"><button class="btn btn-link"><a href="https://api.whatsapp.com/send?phone=+6285881594312&text=Halo%20Admin%20Saya%20Mau%20Custom%20Produk%20{{ $product->name }}" style="a:hover{color: white;}; color :white;">Whatsapp</a></button></a>
+                            
+                            <!-- <i class="fa fa-whatsapp fa-5x" aria-hidden="true" style="color: green"></i> -->
                         </div>
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="price" value="{{ $product->price }}">

@@ -126,9 +126,20 @@
                         <div class="main_menu d-none d-lg-block">
                             <nav>
                                 <ul class="d-flex">
+                                    <!-- page now is index then make home is active -->
+                                    @if (Request::is('/'))
                                     <li><a class="active" href="{{ route ('front.index')}}" >Home</a></li>
                                     <li><a href="{{ route ('front.product')}}">Product</a></li>
                                     <li><a href="{{ route ('about')}}">About US</a></li>
+                                    @elseif (Request::is('product'))
+                                    <li><a  href="{{ route ('front.index')}}" >Home</a></li>
+                                    <li><a class="active" href="{{ route ('front.product')}}">Product</a></li>
+                                    <li><a href="{{ route ('about')}}">About US</a></li>
+                                    @else
+                                    <li><a href="{{ route ('front.index')}}" >Home</a></li>
+                                    <li><a href="{{ route ('front.product')}}">Product</a></li>
+                                    <li><a class="active"  href="{{ route ('about')}}">About US</a></li>
+                                    @endif
                                     <!--<li><a href="contact.html">Contact Us</a> </li>-->
         
                                 </ul>

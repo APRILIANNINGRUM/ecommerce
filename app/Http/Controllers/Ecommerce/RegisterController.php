@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'password' => $request->password,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
-            'district_id' => 3,
+            'district_id' => 399,
             'status' => 1,
             'activate_token' => null
         ]);

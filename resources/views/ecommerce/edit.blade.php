@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Customer - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('template2/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -137,48 +137,44 @@
                                             <td><input type="number" name="phone_number" value="{{$customer->phone_number}}" class="form-control"></td>
                                         <tr>
                                             <td>Provinsi</td>
-                                            <td>
-                                                <select name ="provinces_id" id="provinces_id" class="form-control"> 
-                                                @foreach($provinces as $province)
-                                                    <option value="{{$province->id}}" {{$customer->province_id == $province->id ? 'selected' : ''}}>{{$province->name}}</option>
-                                                @endforeach
+                                           <td>
+                                                <select name="province_id" id="province_id" class="form-control" readonly>
+                                                    <!--get province by customer-->
+                                                    <option value="{{$customer->district->city->province->id}}">{{$customer->district->city->province->name}}</option>
 
-                                                @foreach ($prov as $province)
-                                                    <option value="{{$province->id}}" {{$customer->province_id == $province->id ? 'selected' : ''}}>{{$province->name}}</option>
-                                                @endforeach
-                                                </select> 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kota</td>
-                                            <td>
-                                                <select name="cities_id" id="cities_id" class="form-control">
                                                 
-                                                @foreach($cities as $city) 
-                                                    <option value="{{ $city->id}}" {{$customer->city_id == $city->id ? 'selected' : ''}}> {{$city->name}} </option>
-                                                @endforeach
-                                                @foreach ($cit as $city)
-                                                        <option value="{{$city->id}}" {{$customer->city_id == $city->id ? 'selected' : ''}}>{{$city->name}}</option>
-                                                @endforeach
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>Kota</td>
+                                            
+                                            <td>
+                                                <select name="city_id" id="city_id" class="form-control" readonly>
+                                                    <!--get city by customer-->
+                                                    <option value="{{$customer->district->city->id}}">{{$customer->district->city->name}}</option>
+                                                  
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <!--district-->
+                                        <tr>
                                             <td>Kecamatan</td>
                                             <td>
-                                                <select name="district_id" id="districs_id" class="form-control">
-                                                @foreach($districts as $district) 
-                                                    <option value="{{ $district->id}}" {{$customer->district_id == $district->id ? 'selected' : ''}}> {{$district->name}} </option>
-                                                @endforeach
-                                                @foreach ($dis as $district)
-                                                        <option value="{{$district->id}}" {{$customer->district_id == $district->id ? 'selected' : ''}}>{{$district->name}}</option>
-                                                @endforeach
+                                                <select name="district_id" id="district_id" class="form-control">
+                                                    @foreach($districts as $district)
+                                                    <option value="{{$district->id}}" {{$customer->district_id == $district->id ? 'selected' : ''}}>{{$district->name}}</option>
+                                                    @endforeach
+
+                                                    @foreach($alldistricts as $district)
+                                                    <option value="{{$district->id}}" {{$customer->district_id == $district->id ? 'selected' : ''}}>{{$district->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Alamat</td>
-                                            <td><input type="text" name="address" value="{{$customer->address}}" class="form-control"></td>  
+                                            <td><input type="text" name="address" value="{{$customer->address}}" class="form-control"></td>
                                         </tr>
                                         <tr>
                                             <td>Password</td>

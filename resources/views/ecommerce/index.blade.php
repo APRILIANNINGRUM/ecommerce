@@ -148,9 +148,11 @@
                                         </div>
                                         <figcaption class="product_content">
                                             <h4><a href="{{ url('/product/' . $row->slug) }}"> {{ $row->name }}</a></h4>
-                                            <div class="price_box">
-                                                <span class="old_price">Rp {{ number_format($row->price) }}</span>
-                                            </div>
+                                            <center>
+                                        
+                                                <span>Rp {{ number_format($row->price) }}</span>
+                                            
+                                            </center>
                                         </figcaption>
                                     </figure>
                                 </article>
